@@ -1,14 +1,5 @@
 # Muse Author Kit
 
-Muse is an ACMS project for building interactive, text-based museum worlds.
-Visitors can explore rooms, examine exhibits, talk to characters, solve simple
-puzzles, and eventually connect from web browsers, ordinary MUD clients, or
-real vintage terminals.
-
-You do not need to be an experienced programmer to experiment with Muse.
-World content can be written in **MuseLang**, a small, readable language made
-for describing rooms, objects, actions, and conversations.
-
 This package is the member-facing Muse toolkit.
 
 It is designed for ACMS members who want to:
@@ -134,6 +125,19 @@ muselang prod .\examples\demo_v1.muse
 muselang runtime-install --game-root .\muse-game
 muselang doctor --game-root .\muse-game
 ```
+
+`runtime-install` installs the reusable MuseLang runtime into the Evennia game.
+It does not import authored content.
+
+After `muselang prod` has generated the Evennia batch file, start the game and
+sign in with an administrator account. Enter this command in the game:
+
+```text
+batchcommands demo_v1
+```
+For your own source file, replace `demo_v1` in both the batch filename and the
+`batchcommands` command. For example, compile to
+`.\muse-game\world\my_world.ev`, then enter `batchcommands my_world`.
 
 Good starting points in `docs` are `MuseLang_V1_README.md` for the V1 overview
 and `MuseLang_author_manual.md` for the author guide.
