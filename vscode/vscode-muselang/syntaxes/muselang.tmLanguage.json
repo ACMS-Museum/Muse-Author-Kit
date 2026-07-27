@@ -1,0 +1,147 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "MuseLang",
+  "scopeName": "source.muselang",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#headers"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#header_forms"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.muselang",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.muselang",
+          "match": "\"(?:[^\"\\\\]|\\\\.)*\""
+        }
+      ]
+    },
+    "headers": {
+      "patterns": [
+        {
+          "match": "^(\\s*)(room|type|object|obj|character|char|rule|verb|dialogue|node|goal|time|exit)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "2": {
+              "name": "keyword.declaration.muselang"
+            },
+            "3": {
+              "name": "entity.name.function.muselang"
+            }
+          }
+        }
+      ]
+    },
+    "header_forms": {
+      "patterns": [
+        {
+          "match": "^(\\s*exit\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+to\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+via\\s+[A-Za-z_][A-Za-z0-9_]*)?",
+          "captures": {
+            "1": {
+              "name": "keyword.declaration.muselang"
+            },
+            "2": {
+              "name": "entity.name.function.muselang"
+            },
+            "3": {
+              "name": "keyword.other.muselang"
+            },
+            "4": {
+              "name": "entity.name.type.muselang"
+            },
+            "5": {
+              "name": "keyword.other.muselang"
+            }
+          }
+        },
+        {
+          "match": "^(\\s*)(desc|description|say|hint)\\b(\\s+random\\b)?",
+          "captures": {
+            "2": {
+              "name": "keyword.declaration.muselang"
+            },
+            "3": {
+              "name": "keyword.control.muselang"
+            }
+          }
+        },
+        {
+          "match": "^(\\s*)(if|elif|else|while|until)\\b",
+          "captures": {
+            "2": {
+              "name": "keyword.control.muselang"
+            }
+          }
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "match": "\\b(alias|desc|description|tag|state|portable|visible|from|in|on|of|to|via)\\b",
+          "name": "keyword.other.muselang"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(if|elif|else|while|until|before|after|say|hint|set|move|place|give|show|hide|goto|call|end|option)\\b",
+          "name": "keyword.control.muselang"
+        },
+        {
+          "match": "\\b(not|and|or|is)\\b",
+          "name": "keyword.operator.word.muselang"
+        },
+        {
+          "match": "\\b(true|false)\\b",
+          "name": "constant.language.boolean.muselang"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "\\b-?\\d+(?:\\.\\d+)?\\b",
+          "name": "constant.numeric.muselang"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "==|!=|>=|<=|->|=|\\+\\=|-\\=",
+          "name": "keyword.operator.muselang"
+        }
+      ]
+    }
+  }
+}

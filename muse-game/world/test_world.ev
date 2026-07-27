@@ -1,0 +1,82 @@
+@dig ACMS Museum Showroom;room_showroom;showroom;museum;display_room
+#
+@dig Laboratory;room_laboratory;laboratory;lab
+#
+@tel me = room_showroom
+#
+@desc here = You are standing in the ACMS Museum Showroom. Vintage computers sit proudly around the room. Some tragic members are attending to them.
+#
+@create DECWriter;decwriter;tty;printer_terminal
+#
+@tel decwriter = here
+#
+@desc decwriter = A heavy DECWriter terminal with a roll of fanfold paper loaded.
+#
+@create PDP-8;pdp8;pdp_8
+#
+@tel pdp8 = here
+#
+@desc pdp8 = A compact minicomputer with switches and lights.
+#
+@create Commodore 64;commodore64;c64;commodore;breadbin
+#
+@tel commodore64 = here
+#
+@desc commodore64 = A breadbin Commodore 64 with joystick ports and colour graphics.
+#
+@tel me = room_laboratory
+#
+@desc here = This is the ACMS restoration laboratory. Benches are covered with cables, tools, disk packs, tapes, and half-repaired equipment.
+#
+@create workbench;workbench;bench
+#
+@tel workbench = here
+#
+@desc workbench = A battered electronics workbench.
+#
+@create soldering iron;soldering_iron;iron
+#
+@tel soldering_iron = here
+#
+@desc soldering_iron = A temperature-controlled soldering iron.
+#
+@create Adrian the Greater;adrian_f;president;pres;el presidente
+#
+@tel adrian_f = here
+#
+@desc adrian_f = A bearded man is rumbling through boxes of expansion cards, muttering to himself.
+#
+@create Scott Priest of the PDP-8;scott;priest
+#
+@tel scott = here
+#
+@desc scott = A man sits in front of the PDP-8 holding a PCB with a red tab, and rocking back and forth in his chair. His eyes have that distant, vacant look.
+#
+@create Jeremy RL02;jeremy;j-man
+#
+@tel jeremy = here
+#
+@desc jeremy = A man shuffles large disk-like objects in and out of what looks like a filing cabinet drawer. A poster of the solar system hangs on the wall behind him, with Saturn circled in felt pen.
+#
+@create Robbie High Priest of the PDP-11;robbie
+#
+@tel robbie = here
+#
+@desc robbie = A man with a sparse beard and red hair hunches over the keyboard of a VT220. Hmmm, "BSD or Ultrix, that is the question", he says.
+#
+@create PDP-8 Minicomputer;pdp8;pdp-8
+#
+@tel pdp8 = here
+#
+@desc pdp8 = A machine the size of a refrigerator stands in the lab. It has a front-panel with lights and switches. It's side panels are off, exposing what looks like rows of boards with red tabs. A member sits in front of it, muttering something like "Flip Flip" to himself.
+#
+@tel me = room_showroom
+#
+@open laboratory;to_laboratory;lab = room_laboratory
+#
+@tel me = room_laboratory
+#
+@open showroom;to_showroom;srm = room_showroom
+#
+@tel me = room_showroom
+#

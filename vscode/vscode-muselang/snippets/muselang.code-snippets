@@ -1,0 +1,76 @@
+{
+  "MuseLang Room": {
+    "prefix": "mroom",
+    "body": [
+      "room ${1:room_id} \"${2:Display Name}\"",
+      "  desc",
+      "    \"${3:Room description.}\""
+    ],
+    "description": "Insert a room block with a multiline description."
+  },
+  "MuseLang Object": {
+    "prefix": "mobj",
+    "body": [
+      "object ${1:object_id} in ${2:room_id} \"${3:Display Name}\"",
+      "  alias ${4:alias}",
+      "  desc",
+      "    \"${5:Object description.}\""
+    ],
+    "description": "Insert an object block with a name, alias, and description."
+  },
+  "MuseLang Character": {
+    "prefix": "mchar",
+    "body": [
+      "character ${1:character_id} in ${2:room_id} \"${3:Display Name}\"",
+      "  alias ${4:alias}",
+      "  desc",
+      "    \"${5:Character description.}\""
+    ],
+    "description": "Insert a character block."
+  },
+  "MuseLang Exit": {
+    "prefix": "mexit",
+    "body": [
+      "exit ${1:exit_id} to ${2:destination_room_id}${3: via ${4:door_object_id}}",
+      "  alias ${5:alias}"
+    ],
+    "description": "Insert a room-local exit block."
+  },
+  "MuseLang Desc Block": {
+    "prefix": "mdesc",
+    "body": [
+      "desc",
+      "  \"${1:Description line 1.}\"",
+      "  \"${2:Description line 2.}\""
+    ],
+    "description": "Insert a multiline description block."
+  },
+  "MuseLang Say Block": {
+    "prefix": "msay",
+    "body": [
+      "say",
+      "  \"${1:Speech line 1.}\"",
+      "  \"${2:Speech line 2.}\""
+    ],
+    "description": "Insert a multiline say block."
+  },
+  "MuseLang Hint Block": {
+    "prefix": "mhint",
+    "body": [
+      "hint",
+      "  \"${1:Hint line 1.}\"",
+      "  \"${2:Hint line 2.}\""
+    ],
+    "description": "Insert a multiline hint block."
+  },
+  "MuseLang Verb": {
+    "prefix": "mverb",
+    "body": [
+      "verb ${1:verb_name}",
+      "  alias ${2:alias}",
+      "  if ${3:condition}",
+      "    say \"${4:What happens.}\""
+    ],
+    "description": "Insert a verb block with an alias and a simple conditional."
+  }
+}

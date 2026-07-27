@@ -1,0 +1,73 @@
+{
+  "name": "vscode-muselang",
+  "displayName": "MuseLang",
+  "description": "Syntax highlighting and basic editor support for MuseLang.",
+  "version": "0.1.0",
+  "publisher": "acms",
+  "main": "./extension.js",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:muselang",
+    "onCommand:muselang.lintCurrentDocument"
+  ],
+  "scripts": {
+    "package": "vsce package",
+    "package:pre": "node -e \"const fs=require('fs'); const p='package.json'; const pkg=JSON.parse(fs.readFileSync(p,'utf8')); if(!pkg.engines||!pkg.engines.vscode){throw new Error('missing engines.vscode');} console.log('package metadata ok');\""
+  },
+  "contributes": {
+    "configuration": {
+      "title": "MuseLang",
+      "properties": {
+        "muselang.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Python executable used to run the MuseLang linter."
+        },
+        "muselang.lintOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run MuseLang linting when a MuseLang file is saved."
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "muselang",
+        "aliases": [
+          "MuseLang",
+          "MuseLang V1",
+          "MuseLang V2"
+        ],
+        "extensions": [
+          ".muse",
+          ".muselang"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "muselang",
+        "scopeName": "source.muselang",
+        "path": "./syntaxes/muselang.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "muselang",
+        "path": "./snippets/muselang.code-snippets"
+      }
+    ],
+    "commands": [
+      {
+        "command": "muselang.lintCurrentDocument",
+        "title": "MuseLang: Lint Current Document"
+      }
+    ]
+  }
+}
