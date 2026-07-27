@@ -1,5 +1,14 @@
 # Muse Author Kit
 
+Muse is an ACMS project for building interactive, text-based museum worlds.
+Visitors can explore rooms, examine exhibits, talk to characters, solve simple
+puzzles, and eventually connect from web browsers, ordinary MUD clients, or
+real vintage terminals.
+
+You do not need to be an experienced programmer to experiment with Muse.
+World content can be written in **MuseLang**, a small, readable language made
+for describing rooms, objects, actions, and conversations.
+
 This package is the member-facing Muse toolkit.
 
 It is designed for ACMS members who want to:
