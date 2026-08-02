@@ -31,7 +31,9 @@ them in a local Muse game, you are in the right place.
 - `docs`: MuseLang V1 documentation
   - `MuseLang_V1_README.md`: overview of the MuseLang V1 definition and workflow
   - `MuseLang_author_manual.md`: author-facing language guide
-- `vscode`: VS Code support for MuseLang V1
+- `support`: IDE editor and other tool support files
+  - `vscode`: VS Code support for MuseLang V1
+  - `emacs`: emacs support for MuseLang V1
 - `packages`: packaged MuseLang wheel files
 - `install`: helper install scripts for PowerShell, Windows batch, and Bash
 
@@ -123,6 +125,10 @@ To install the MuseLang V1 VS Code extension:
 
 After that, `.muse` and `.muselang` files should open with MuseLang V1 syntax
 highlighting and lint support.
+
+## GNU Emacs
+
+Installation [instructions](support/emacs) for emacs can be found in the support directory
 
 ## MuseLang workflow
 
