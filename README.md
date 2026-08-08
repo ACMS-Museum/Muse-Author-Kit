@@ -135,8 +135,8 @@ Installation [instructions](support/emacs) for emacs can be found in the support
 Typical commands from this kit root:
 
 ```powershell
-muselang lint .\examples\demo_v1.muse
-muselang prod .\examples\demo_v1.muse
+muselang lint .\examples\Demo\demo_v1.muse
+muselang prod .\examples\Demo\demo_v1.muse
 muselang runtime-install --game-root .\muse-game
 muselang doctor --game-root .\muse-game
 ```
