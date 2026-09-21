@@ -1,0 +1,21 @@
+room laboratory "Laboratory"
+
+goal panel_unlocked
+  desc "Unlock the test panel."
+
+object test_panel in laboratory from device
+  alias "panel"
+  state solved = false
+
+  verb press
+    if this.solved
+      say "The panel is already solved."
+      stop
+    let roll = random_int(1, 6)
+    say "The display rolls a {roll}."
+    if roll == 6
+      set this.solved = true
+      say "The panel unlocks."
+      achieve panel_unlocked
+    else
+      say "Nothing else happens."

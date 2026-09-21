@@ -3,74 +3,74 @@
     "prefix": "mroom",
     "body": [
       "room ${1:room_id} \"${2:Display Name}\"",
-      "  desc",
-      "    \"${3:Room description.}\""
+      "  desc \"${3:Room description.}\""
     ],
-    "description": "Insert a room block with a multiline description."
+    "description": "Insert a MuseLang 3 room."
   },
   "MuseLang Object": {
     "prefix": "mobj",
     "body": [
-      "object ${1:object_id} in ${2:room_id} \"${3:Display Name}\"",
-      "  alias ${4:alias}",
-      "  desc",
-      "    \"${5:Object description.}\""
+      "object ${1:object_id} in ${2:room_id} from ${3:device}",
+      "  alias \"${4:alias}\"",
+      "  state ${5:open} = ${6:false}",
+      "",
+      "  verb ${7:examine}",
+      "    say \"${8:What the visitor sees.}\""
     ],
-    "description": "Insert an object block with a name, alias, and description."
+    "description": "Insert a MuseLang 3 object with state and a verb."
   },
   "MuseLang Character": {
     "prefix": "mchar",
     "body": [
-      "character ${1:character_id} in ${2:room_id} \"${3:Display Name}\"",
-      "  alias ${4:alias}",
-      "  desc",
-      "    \"${5:Character description.}\""
+      "character ${1:character_id} in ${2:room_id}",
+      "  alias \"${3:alias}\"",
+      "  desc \"${4:Character description.}\""
     ],
-    "description": "Insert a character block."
+    "description": "Insert a MuseLang 3 character."
   },
-  "MuseLang Exit": {
-    "prefix": "mexit",
+  "MuseLang Goal": {
+    "prefix": "mgoal",
     "body": [
-      "exit ${1:exit_id} to ${2:destination_room_id}${3: via ${4:door_object_id}}",
-      "  alias ${5:alias}"
+      "goal ${1:goal_id}",
+      "  desc \"${2:Goal description.}\""
     ],
-    "description": "Insert a room-local exit block."
+    "description": "Insert a MuseLang 3 goal."
   },
-  "MuseLang Desc Block": {
-    "prefix": "mdesc",
+  "MuseLang Verb With Argument": {
+    "prefix": "mverbarg",
     "body": [
-      "desc",
-      "  \"${1:Description line 1.}\"",
-      "  \"${2:Description line 2.}\""
+      "verb ${1:enter} <${2:value}:${3:int}>",
+      "  if ${2:value} == ${4:1977}",
+      "    say \"${5:That works.}\"",
+      "  else",
+      "    say \"${6:That does not work.}\""
     ],
-    "description": "Insert a multiline description block."
+    "description": "Insert a MuseLang 3 verb with a typed argument."
   },
-  "MuseLang Say Block": {
-    "prefix": "msay",
+  "MuseLang Routine": {
+    "prefix": "mroutine",
     "body": [
-      "say",
-      "  \"${1:Speech line 1.}\"",
-      "  \"${2:Speech line 2.}\""
+      "routine ${1:status}",
+      "  say \"${2:Status text.}\"",
+      "",
+      "verb ${3:check}",
+      "  run ${1:status}"
     ],
-    "description": "Insert a multiline say block."
+    "description": "Insert a MuseLang 3 routine and caller verb."
   },
-  "MuseLang Hint Block": {
-    "prefix": "mhint",
+  "MuseLang For Loop": {
+    "prefix": "mfor",
     "body": [
-      "hint",
-      "  \"${1:Hint line 1.}\"",
-      "  \"${2:Hint line 2.}\""
+      "for ${1:i} = ${2:1} to ${3:10}",
+      "  say \"{${1:i}}\""
     ],
-    "description": "Insert a multiline hint block."
+    "description": "Insert a MuseLang 3 counted for loop."
   },
-  "MuseLang Verb": {
-    "prefix": "mverb",
+  "MuseLang Array": {
+    "prefix": "marray",
     "body": [
-      "verb ${1:verb_name}",
-      "  alias ${2:alias}",
-      "  if ${3:condition}",
-      "    say \"${4:What happens.}\""
+      "array ${1:world.board}[${2:2},${3:3}] = ${4:0}"
     ],
-    "description": "Insert a verb block with an alias and a simple conditional."
+    "description": "Insert a MuseLang 3 array declaration."
   }
 }

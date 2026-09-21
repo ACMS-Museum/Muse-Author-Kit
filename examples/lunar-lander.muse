@@ -1,0 +1,64 @@
+room orbit "Command Module"
+  desc "The planet fills the lower viewport. The landing beacon blinks below."
+
+room surface "Landing Site"
+  desc "Grey dust stretches in every direction. The command module is now a bright point overhead."
+
+object lander in orbit from device
+  alias console lander "flight computer"
+
+  desc "The lander console shows altitude, velocity, fuel, and thrust."
+
+  state active = false
+  state altitude = 1000
+  state velocity = 0
+  state fuel = 500
+  state turn = 0
+  state gravity = 10
+  state safe_velocity = 5
+
+  verb land
+    set this.active = true
+    set this.altitude = 1000
+    set this.velocity = 0
+    set this.fuel = 500
+    set this.turn = 0
+    say "Landing sequence started."
+    do this.status
+
+  verb status
+    say "Turn: {this.turn}"
+    say "Altitude: {this.altitude} m"
+    say "Velocity: {this.velocity} m/s"
+    say "Fuel: {this.fuel}"
+    say "Enter thrust from 0 to 100."
+
+  verb thrust <amount:int>
+    if not this.active
+      say "The landing sequence is not active. Use LAND first."
+      stop
+
+    if amount < 0 or amount > 100
+      say "Thrust must be between 0 and 100."
+      stop
+
+    let burn = min(amount, this.fuel)
+    let lift = burn / 5
+
+    set this.fuel -= burn
+    set this.velocity += this.gravity - lift
+    set this.altitude -= this.velocity
+    set this.turn += 1
+
+    if this.altitude <= 0
+      if abs(this.velocity) <= this.safe_velocity
+        say "Contact light. The lander settles safely onto the surface."
+        set this.active = false
+        achieve safe_landing
+        move player to surface
+      else
+        say "Impact velocity too high. The lander crashes into the surface."
+        set this.active = false
+        achieve crash_landing
+    else
+      do this.status

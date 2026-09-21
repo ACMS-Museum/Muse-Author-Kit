@@ -1,8 +1,8 @@
 {
   "name": "vscode-muselang",
   "displayName": "MuseLang",
-  "description": "Syntax highlighting and basic editor support for MuseLang.",
-  "version": "0.1.0",
+  "description": "Syntax highlighting and lint support for MuseLang 3.",
+  "version": "0.3.0",
   "publisher": "acms",
   "main": "./extension.js",
   "engines": {
@@ -25,8 +25,8 @@
       "properties": {
         "muselang.pythonPath": {
           "type": "string",
-          "default": "python",
-          "description": "Python executable used to run the MuseLang linter."
+          "default": "",
+          "description": "Python executable used to run the MuseLang linter. Leave blank to use the workspace .venv when available."
         },
         "muselang.lintOnSave": {
           "type": "boolean",
@@ -40,8 +40,7 @@
         "id": "muselang",
         "aliases": [
           "MuseLang",
-          "MuseLang V1",
-          "MuseLang V2"
+          "MuseLang V3"
         ],
         "extensions": [
           ".muse",

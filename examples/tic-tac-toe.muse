@@ -1,0 +1,119 @@
+room game_room "Games Alcove"
+  desc "A small alcove beside the exhibits. A simple terminal waits on a table."
+
+object tictactoe_terminal in game_room from device
+  alias terminal "tic tac toe" "noughts and crosses"
+  desc "A small terminal running a game of tic-tac-toe."
+
+  state active = false
+  state current_player = "X"
+  state moves = 0
+  state winner = ""
+  state game_over = false
+
+  state a1 = " "
+  state a2 = " "
+  state a3 = " "
+  state b1 = " "
+  state b2 = " "
+  state b3 = " "
+  state c1 = " "
+  state c2 = " "
+  state c3 = " "
+
+  verb play
+    run reset
+    say "New game of tic-tac-toe started."
+    say "Player X goes first."
+    run board
+    say "Enter moves as: mark a1, mark b2, mark c3, and so on."
+
+  verb reset
+    run reset
+
+  verb board
+    run board
+
+  verb mark <square:text>
+    if not this.active
+      say "No game is active. Type PLAY to start a new game."
+      stop
+
+    if this.game_over
+      say "The game is already over. Type RESET to start again."
+      stop
+
+    if square == "a1"
+      if this.a1 != " "
+        say "Square A1 is already occupied."
+        stop
+      set this.a1 = this.current_player
+
+    elif square == "a2"
+      if this.a2 != " "
+        say "Square A2 is already occupied."
+        stop
+      set this.a2 = this.current_player
+
+    elif square == "a3"
+      if this.a3 != " "
+        say "Square A3 is already occupied."
+        stop
+      set this.a3 = this.current_player
+
+    elif square == "b1"
+      if this.b1 != " "
+        say "Square B1 is already occupied."
+        stop
+      set this.b1 = this.current_player
+
+    elif square == "b2"
+      if this.b2 != " "
+        say "Square B2 is already occupied."
+        stop
+      set this.b2 = this.current_player
+
+    elif square == "b3"
+      if this.b3 != " "
+        say "Square B3 is already occupied."
+        stop
+      set this.b3 = this.current_player
+
+    elif square == "c1"
+      if this.c1 != " "
+        say "Square C1 is already occupied."
+        stop
+      set this.c1 = this.current_player
+
+    elif square == "c2"
+      if this.c2 != " "
+        say "Square C2 is already occupied."
+        stop
+      set this.c2 = this.current_player
+
+    elif square == "c3"
+      if this.c3 != " "
+        say "Square C3 is already occupied."
+        stop
+      set this.c3 = this.current_player
+
+    else
+      say "Unknown square. Use a1, a2, a3, b1, b2, b3, c1, c2, or c3."
+      stop
+
+    set this.moves += 1
+
+    run check_winner
+    run board
+
+    if this.game_over
+      if this.winner == "draw"
+        say "The game is a draw."
+        achieve tictactoe_draw
+      else
+        say "Player {this.winner} wins!"
+        achieve tictactoe_win
+      stop
+
+    run switch_player
+    say "Player {this.current_player}'s turn."

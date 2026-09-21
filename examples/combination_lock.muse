@@ -1,0 +1,27 @@
+room laboratory "Laboratory"
+
+object storage_locker in laboratory from container
+  alias "locker"
+  state open = false
+  state locked = true
+  state code = 1977
+  state attempts = 0
+  state disabled = false
+
+  verb enter <guess:int>
+    if this.disabled
+      say "The locker refuses further attempts."
+      stop
+    if not this.locked
+      say "The locker is already unlocked."
+      stop
+    set this.attempts += 1
+    if guess == this.code
+      set this.locked = false
+      set this.open = true
+      say "The locker clicks open."
+    elif this.attempts >= 3
+      set this.disabled = true
+      say "The locker emits an angry buzz and refuses further attempts."
+    else
+      say "The locker rejects the code. Attempts: {this.attempts}."

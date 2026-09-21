@@ -14,10 +14,10 @@ This package is the member-facing Muse toolkit.
 It is designed for ACMS members who want to:
 
 - write MuseLang source files
-- lint and compile them with MuseLang V1
+- lint and compile them with the current MuseLang release, MuseLang V3
 - install runtime support into the local `muse-game` scaffold
 - run the Muse game locally with Evennia
-- use the MuseLang V1 VS Code extension
+- use the included MuseLang documentation and examples
 
 This package is not the full Muse development repository.
 
@@ -27,11 +27,15 @@ them in a local Muse game, you are in the right place.
 ## Package contents
 
 - `muse-game`: the endorsed local game scaffold
-- `examples`: MuseLang V1 example content
-- `docs`: MuseLang V1 documentation
-  - `MuseLang_V1_README.md`: overview of the MuseLang V1 definition and workflow
-  - `MuseLang_author_manual.md`: author-facing language guide
-- `vscode`: VS Code support for MuseLang V1
+- `examples`: MuseLang V3 example content
+- `docs`: MuseLang V3 documentation
+  - `MuseLang_V3_README.md`: overview of the MuseLang V3 definition and workflow
+  - `MuseLang3_Author_Manual.md`: author-facing language guide
+  - `MuseLang3_Keyword_Reference.md`: keyword reference
+  - `MuseLang3_Keyword_Reference.html`: browser-friendly keyword reference
+  - `CONTRIBUTING_MUSE_CONTENT.md`: source contribution workflow
+  - `CONTENT_STYLE_GUIDE.md`: fictional content guidance
+- `vscode`: VS Code support for MuseLang V3
 - `packages`: packaged MuseLang wheel files
 - `install`: helper install scripts for PowerShell, Windows batch, and Bash
 
@@ -113,7 +117,7 @@ evennia start
 
 ## VS Code
 
-To install the MuseLang V1 VS Code extension:
+To install the MuseLang V3 VS Code extension:
 
 1. Open VS Code.
 2. Run `Developer: Install Extension from Location...`
@@ -121,18 +125,20 @@ To install the MuseLang V1 VS Code extension:
 
 `vscode\vscode-muselang`
 
-After that, `.muse` and `.muselang` files should open with MuseLang V1 syntax
-highlighting and lint support.
+After that, `.muse` and `.muselang` files should open with MuseLang syntax
+highlighting and lint support. The extension uses the kit's `.venv` Python when
+available, so run the author-kit installer before relying on editor linting.
 
 ## MuseLang workflow
 
 Typical commands from this kit root:
 
 ```powershell
-muselang lint .\examples\demo_v1.muse
-muselang prod .\examples\demo_v1.muse
+muselang lint .\examples\combination_lock.muse
 muselang runtime-install --game-root .\muse-game
 muselang doctor --game-root .\muse-game
+muselang prod .\examples\combination_lock.muse `
+  --batch-out .\muse-game\world\combination_lock.ev
 ```
 
 `runtime-install` installs the reusable MuseLang runtime into the Evennia game.
@@ -142,18 +148,25 @@ After `muselang prod` has generated the Evennia batch file, start the game and
 sign in with an administrator account. Enter this command in the game:
 
 ```text
-batchcommands demo_v1
+batchcommands combination_lock
 ```
-For your own source file, replace `demo_v1` in both the batch filename and the
-`batchcommands` command. For example, compile to
+
+For your own source file, replace `combination_lock` in both the batch filename
+and the `batchcommands` command. For example, compile to
 `.\muse-game\world\my_world.ev`, then enter `batchcommands my_world`.
 
-Good starting points in `docs` are `MuseLang_V1_README.md` for the V1 overview
-and `MuseLang_author_manual.md` for the author guide.
+MuseLang does not yet reconcile every change with content already imported into
+the Evennia database. Re-importing the same world can create duplicates or
+conflicts. Use a clean demonstration database while learning, and back up any
+world data you care about before importing.
+
+Good starting points in `docs` are `MuseLang_V3_README.md` for the V3 overview,
+`MuseLang3_Author_Manual.md` for the author guide, and
+`CONTRIBUTING_MUSE_CONTENT.md` for the contribution workflow.
 
 ## Multi-file projects
 
-MuseLang V1 can compile either:
+MuseLang V3 can compile either:
 
 - a single `.muse` file, or
 - a folder containing multiple top-level `*.muse` or `*.muselang` files
@@ -168,5 +181,5 @@ For multi-file builds:
 
 - files are read in alphabetical order
 - ids must still be unique across the whole project
-- V1 does not support splitting one room, object, character, or rule across
+- V3 does not support splitting one room, object, character, or rule across
   multiple files by repeating its id later

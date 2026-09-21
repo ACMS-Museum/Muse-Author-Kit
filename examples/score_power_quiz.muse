@@ -1,0 +1,22 @@
+state player.score = 0
+state world.exhibit_power = false
+
+room gallery "Museum Gallery"
+
+goal quiz_complete
+  desc "Answer the exhibit question."
+
+object exhibit_console in gallery from device
+  alias "console"
+
+  verb power_on
+    set world.exhibit_power = true
+    say "Power reaches the shared exhibit."
+
+  verb answer <value:int>
+    if value == 8
+      set player.score += 1
+      say "Correct. Your score is {player.score}."
+      achieve quiz_complete
+    else
+      say "That answer is not correct."

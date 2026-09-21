@@ -12,16 +12,37 @@ const DIAGNOSTIC_SOURCE = "muselang";
 function resolveModulePath() {
   const workspaceFolders = vscode.workspace.workspaceFolders || [];
   for (const folder of workspaceFolders) {
-    const candidate = path.join(folder.uri.fsPath, "muse-dev", "MuseLang", "V1", "src");
+    const candidate = path.join(folder.uri.fsPath, "muse-dev", "MuseLang", "V3", "src");
     if (fs.existsSync(candidate)) {
       return candidate;
     }
   }
-  const bundled = path.resolve(__dirname, "..", "V1", "src");
+  const bundled = path.resolve(__dirname, "..", "V3", "src");
   if (fs.existsSync(bundled)) {
     return bundled;
   }
   return undefined;
+}
+
+function resolvePythonPath() {
+  const configured = vscode.workspace.getConfiguration("muselang").get("pythonPath");
+  if (configured) {
+    return configured;
+  }
+  const workspaceFolders = vscode.workspace.workspaceFolders || [];
+  for (const folder of workspaceFolders) {
+    const root = folder.uri.fsPath;
+    const candidates = [
+      path.join(root, ".venv", "Scripts", "python.exe"),
+      path.join(root, ".venv", "bin", "python"),
+    ];
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) {
+        return candidate;
+      }
+    }
+  }
+  return "python";
 }
 
 function makeTempSource(document) {
@@ -50,17 +71,14 @@ function genericDiagnostic(message, document) {
 }
 
 function runLint(document) {
-  const python = vscode.workspace.getConfiguration("muselang").get("pythonPath") || "python";
+  const python = resolvePythonPath();
   const modulePath = resolveModulePath();
-  if (!modulePath) {
-    return {
-      diagnostics: [genericDiagnostic("Could not locate the MuseLang Python package.", document)],
-    };
-  }
 
   const { tempDir, filePath } = makeTempSource(document);
   const env = { ...process.env };
-  env.PYTHONPATH = env.PYTHONPATH ? `${modulePath}${path.delimiter}${env.PYTHONPATH}` : modulePath;
+  if (modulePath) {
+    env.PYTHONPATH = env.PYTHONPATH ? `${modulePath}${path.delimiter}${env.PYTHONPATH}` : modulePath;
+  }
 
   try {
     const result = spawnSync(python, ["-m", "muselang.cli", "lint", filePath], {

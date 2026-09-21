@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuseLang3 Keyword Reference Manual</title>
+<style>
+:root { color-scheme: light; --ink: #17202a; --blue: #174a7e; --paper: #fffdf7; --rule: #b8b3a6; --code: #f1efe7; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #e8e5dc; color: var(--ink); font: 17px/1.58 Georgia, "Times New Roman", serif; }
+main { max-width: 980px; margin: 0 auto; min-height: 100vh; padding: 3rem clamp(1.25rem, 5vw, 4.5rem); background: var(--paper); box-shadow: 0 0 24px #0002; }
+h1, h2, h3 { color: var(--blue); font-family: "Segoe UI", Arial, sans-serif; line-height: 1.2; }
+h1 { margin-top: 0; font-size: clamp(2rem, 5vw, 3.35rem); border-bottom: 4px double var(--blue); padding-bottom: .5rem; }
+h2 { margin-top: 3.2rem; padding-top: .7rem; border-top: 2px solid var(--blue); font-size: 2rem; scroll-margin-top: 1rem; }
+h3 { margin-top: 2rem; font-size: 1.25rem; }
+.permalink { margin-left: .45rem; color: #8a97a3; text-decoration: none; font-weight: normal; opacity: 0; }
+h1:hover .permalink, h2:hover .permalink, h3:hover .permalink, .permalink:focus { opacity: 1; }
+.back-to-index { margin: -.9rem 0 1.4rem; font: .88rem/1.4 "Segoe UI", Arial, sans-serif; }
+.back-to-index a { text-decoration: none; }
+a { color: #075b9e; text-underline-offset: .16em; }
+.code-link { text-decoration: none; }
+code { font: .92em Consolas, "Courier New", monospace; background: var(--code); border-radius: 3px; padding: .08em .28em; }
+pre { overflow-x: auto; margin: 1rem 0 1.5rem; padding: 1rem 1.15rem; color: #f5f5f5; background: #1d2832; border-left: 5px solid #3d82bb; border-radius: 3px; }
+pre code { padding: 0; color: inherit; background: transparent; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0 1.8rem; }
+table { width: 100%; border-collapse: collapse; font-family: "Segoe UI", Arial, sans-serif; font-size: .94rem; }
+th, td { padding: .55rem .7rem; border: 1px solid var(--rule); text-align: left; vertical-align: top; }
+th { color: #fff; background: var(--blue); }
+tbody tr:nth-child(even) { background: #f4f1e8; }
+hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--rule); }
+strong { color: #152f49; }
+@media print { body { background: #fff; } main { max-width: none; padding: 0; box-shadow: none; } h2 { break-before: page; } a { color: inherit; } }
+</style>
+</head>
+<body>
+<main>
+<h1 id="muselang3-keyword-reference-manual">MuseLang3 Keyword Reference Manual<a class="permalink" href="#muselang3-keyword-reference-manual" aria-label="Link to this section">#</a></h1>
+<div class="table-wrap"><table>
+<thead><tr><th>Field</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Edition</td><td>Implemented profile 0.1</td></tr>
+<tr><td>Language version</td><td>3.0</td></tr>
+</tbody>
+</table></div>
+<p>This manual is an alphabetical reference to every keyword, reserved namespace word, word operator, Boolean literal, and intrinsic function in the implemented MuseLang3 language. Its organisation follows the spirit of classic Microsoft BASIC reference manuals: find the word alphabetically, then consult its syntax, purpose, remarks, examples, and related entries.</p>
+<p>For a tutorial introduction, see <code>MuseLang3_Author_Manual.md</code>. For normative runtime semantics, see <code>MuseLang_spec_v3.md</code>.</p>
+<h2 id="how-to-read-an-entry">How to Read an Entry<a class="permalink" href="#how-to-read-an-entry" aria-label="Link to this section">#</a></h2>
+<p>Notation used in syntax lines:</p>
+<ul>
+<li><code>&lt;name&gt;</code> means an author-supplied item.</li>
+<li><code>[item]</code> means an optional item.</li>
+<li><code>...</code> means the preceding form may be repeated.</li>
+<li>Literal punctuation and keywords appear exactly as written.</li>
+</ul>
+<p>Examples are sometimes fragments intended to appear inside the room, object, routine, or verb shown by their surrounding context.</p>
+<h2 id="alphabetical-index">Alphabetical Index<a class="permalink" href="#alphabetical-index" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead><tr><th>A–C</th><th>D–M</th><th>N–S</th><th>T–Z</th></tr></thead>
+<tbody>
+<tr><td><a class="code-link" href="#abs"><code>abs</code></a></td><td><a class="code-link" href="#desc"><code>desc</code></a></td><td><a class="code-link" href="#not"><code>not</code></a></td><td><a class="code-link" href="#team"><code>team</code></a></td></tr>
+<tr><td><a class="code-link" href="#achieve"><code>achieve</code></a></td><td><a class="code-link" href="#description"><code>description</code></a></td><td><a class="code-link" href="#obj"><code>obj</code></a></td><td><a class="code-link" href="#this"><code>this</code></a></td></tr>
+<tr><td><a class="code-link" href="#alias"><code>alias</code></a></td><td><a class="code-link" href="#elif"><code>elif</code></a></td><td><a class="code-link" href="#object"><code>object</code></a></td><td><a class="code-link" href="#to"><code>to</code></a></td></tr>
+<tr><td><a class="code-link" href="#and"><code>and</code></a></td><td><a class="code-link" href="#else"><code>else</code></a></td><td><a class="code-link" href="#or"><code>or</code></a></td><td><a class="code-link" href="#true"><code>true</code></a></td></tr>
+<tr><td><a class="code-link" href="#call"><code>call</code></a></td><td><a class="code-link" href="#end"><code>end</code></a></td><td><a class="code-link" href="#player"><code>player</code></a></td><td><a class="code-link" href="#verb"><code>verb</code></a></td></tr>
+<tr><td><a class="code-link" href="#ceil"><code>ceil</code></a></td><td><a class="code-link" href="#false"><code>false</code></a></td><td><a class="code-link" href="#random_chance"><code>random_chance</code></a></td><td><a class="code-link" href="#world"><code>world</code></a></td></tr>
+<tr><td><a class="code-link" href="#char"><code>char</code></a></td><td><a class="code-link" href="#floor"><code>floor</code></a></td><td><a class="code-link" href="#random_choice"><code>random_choice</code></a></td><td></td></tr>
+<tr><td><a class="code-link" href="#character"><code>character</code></a></td><td><a class="code-link" href="#from"><code>from</code></a></td><td><a class="code-link" href="#random_int"><code>random_int</code></a></td><td></td></tr>
+<tr><td><a class="code-link" href="#clamp"><code>clamp</code></a></td><td><a class="code-link" href="#game"><code>game</code></a></td><td><a class="code-link" href="#real"><code>real</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#goal"><code>goal</code></a></td><td><a class="code-link" href="#room"><code>room</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#have"><code>have</code></a></td><td><a class="code-link" href="#round"><code>round</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#hint"><code>hint</code></a></td><td><a class="code-link" href="#routine"><code>routine</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#if"><code>if</code></a></td><td><a class="code-link" href="#run"><code>run</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#in"><code>in</code></a></td><td><a class="code-link" href="#say"><code>say</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#let"><code>let</code></a></td><td><a class="code-link" href="#scenario"><code>scenario</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#max"><code>max</code></a></td><td><a class="code-link" href="#set"><code>set</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#min"><code>min</code></a></td><td><a class="code-link" href="#state"><code>state</code></a></td><td></td></tr>
+<tr><td></td><td><a class="code-link" href="#move"><code>move</code></a></td><td><a class="code-link" href="#stop"><code>stop</code></a></td><td></td></tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="abs">ABS<a class="permalink" href="#abs" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic numeric function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">abs(&lt;numeric_expression&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the non-negative magnitude of a number.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#abs"><code>abs</code></a> accepts exactly one finite integer or floating-point value. Supplying a Boolean, string, unresolved value, or non-finite number causes a safe runtime error. It is commonly used when direction is stored in a sign but only speed or distance magnitude matters.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let impact_speed = abs(this.velocity)
+say &quot;Impact speed: {impact_speed} m/s.&quot;</code></pre>
+<pre><code class="language-muse">if abs(this.temperature_error) &lt;= 2
+  say &quot;Temperature is within tolerance.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#ceil"><code>ceil</code></a>, <a class="code-link" href="#floor"><code>floor</code></a>, <a class="code-link" href="#round"><code>round</code></a>, <a class="code-link" href="#min"><code>min</code></a>, <a class="code-link" href="#max"><code>max</code></a></p>
+<hr>
+<h2 id="achieve">ACHIEVE<a class="permalink" href="#achieve" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">achieve &lt;goal_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Awards a declared goal to the current player.</p>
+<p><strong>Remarks</strong></p>
+<p>The goal must have been declared at top level with <a class="code-link" href="#goal"><code>goal</code></a>. The runtime persists the goal ID in the player&#x27;s <code>muse3/achievements</code> state. Re-awarding a goal does not add a duplicate stored ID. The achievement is included in the command&#x27;s MuseLang replay information and is rolled back if the command later fails.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">goal panel_unlocked
+  desc &quot;Unlock the test panel.&quot;
+
+object panel in laboratory from device
+  state solved = false
+  verb solve
+    set this.solved = true
+    achieve panel_unlocked</code></pre>
+<pre><code class="language-muse">if abs(this.velocity) &lt;= this.safe_velocity
+  achieve safe_landing
+  move player to surface</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#goal"><code>goal</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#player"><code>player</code></a></p>
+<hr>
+<h2 id="alias">ALIAS<a class="permalink" href="#alias" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Noun declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">alias &lt;alias_value&gt; [&lt;alias_value&gt; ...]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Adds alternative player-facing names to a room, object, or character.</p>
+<p><strong>Remarks</strong></p>
+<p>Write aliases inside the noun block. A one-word alias may be unquoted; multiword aliases must be quoted. Duplicate aliases on one noun are rejected case-insensitively. Profile 0.1 does not support <a class="code-link" href="#alias"><code>alias</code></a> inside a verb block, so it cannot yet define alternate verb command words.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object lander_console in orbit from device
+  alias console lander</code></pre>
+<pre><code class="language-muse">character curator in gallery &quot;Museum Curator&quot;
+  alias guide &quot;museum guide&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#verb"><code>verb</code></a></p>
+<hr>
+<h2 id="and">AND<a class="permalink" href="#and" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Boolean word operator</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">&lt;left_expression&gt; and &lt;right_expression&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Produces true only when both operands are truthy.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#and"><code>and</code></a> evaluates left to right and short-circuits: when the left operand is false, the right operand is not evaluated. It has higher precedence than <a class="code-link" href="#or"><code>or</code></a> and lower precedence than comparisons. Use parentheses where grouping might be unclear. The special <a class="code-link" href="#have"><code>have</code></a> predicate cannot currently be nested as one operand of <a class="code-link" href="#and"><code>and</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if this.active and this.fuel &gt; 0
+  say &quot;The lander is ready.&quot;</code></pre>
+<pre><code class="language-muse">if amount &gt;= 0 and amount &lt;= 100
+  say &quot;Thrust accepted.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#not"><code>not</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#true"><code>true</code></a>, <a class="code-link" href="#false"><code>false</code></a></p>
+<hr>
+<h2 id="call">CALL<a class="permalink" href="#call" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">call &lt;registered_target&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Invokes a Tier 3 handler registered by trusted Python runtime code.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#call"><code>call</code></a> is the escape route for hardware integration, network activity, and specialised behaviour that does not belong in the bounded language. The target is conventionally a dotted name. MuseLang3 does not import arbitrary authored targets; the exact target must exist in the trusted handler registry.</p>
+<p>External handler effects are outside MuseLang3 rollback and deterministic replay. A handler should validate first and be idempotent where practical.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">verb activate
+  if not this.enabled
+    say &quot;The exhibit is disabled.&quot;
+    stop
+  call museum.handlers.activate_exhibit</code></pre>
+<pre><code class="language-muse">verb ring_bell
+  call world.hardware.ring_bell
+  say &quot;The bell command has been sent.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#stop"><code>stop</code></a>, <a class="code-link" href="#verb"><code>verb</code></a></p>
+<hr>
+<h2 id="ceil">CEIL<a class="permalink" href="#ceil" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic numeric function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">ceil(&lt;numeric_expression&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the least integer greater than or equal to its argument.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#ceil"><code>ceil</code></a> accepts exactly one finite number. For positive values it rounds upward; for negative values it moves toward positive infinity.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let crates_needed = ceil(this.parts / this.crate_capacity)</code></pre>
+<pre><code class="language-muse">say &quot;Allow {ceil(this.minutes_remaining)} whole minutes.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#floor"><code>floor</code></a>, <a class="code-link" href="#round"><code>round</code></a>, <a class="code-link" href="#abs"><code>abs</code></a></p>
+<hr>
+<h2 id="char">CHAR<a class="permalink" href="#char" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Declaration alias and argument type name</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">char &lt;character_id&gt; in &lt;room_id&gt; [from &lt;type_id&gt;] [&quot;Display Name&quot;]
+&lt;name:char&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Provides the short form of <a class="code-link" href="#character"><code>character</code></a>; in an argument declaration it requests an accessible object reference intended to represent a character.</p>
+<p><strong>Remarks</strong></p>
+<p>As a declaration keyword, <a class="code-link" href="#char"><code>char</code></a> is exactly synonymous with <a class="code-link" href="#character"><code>character</code></a>. As an argument type, profile 0.1 resolves an accessible object but does not yet enforce that the resolved object is specifically a character.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">char curator in gallery &quot;Museum Curator&quot;
+  alias guide</code></pre>
+<pre><code class="language-muse">verb identify &lt;person:char&gt;
+  say &quot;The selected person is {person}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#from"><code>from</code></a>, Appendix A</p>
+<hr>
+<h2 id="character">CHARACTER<a class="permalink" href="#character" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Top-level declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">character &lt;character_id&gt; in &lt;room_id&gt; [from &lt;type_id&gt;] [&quot;Display Name&quot;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares a character located in an existing room.</p>
+<p><strong>Remarks</strong></p>
+<p>A character may contain <a class="code-link" href="#alias"><code>alias</code></a>, <a class="code-link" href="#desc"><code>desc</code></a>/<a class="code-link" href="#description"><code>description</code></a>, local <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#routine"><code>routine</code></a>, and <a class="code-link" href="#verb"><code>verb</code></a> declarations. Dialogue syntax is not implemented in profile 0.1. The short form is <a class="code-link" href="#char"><code>char</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">character curator in gallery &quot;Museum Curator&quot;
+  desc &quot;The curator is arranging a display.&quot;</code></pre>
+<pre><code class="language-muse">character technician in laboratory from thing
+  state busy = false
+  verb status
+    say &quot;Technician busy: {this.busy}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#char"><code>char</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#from"><code>from</code></a>, <a class="code-link" href="#object"><code>object</code></a></p>
+<hr>
+<h2 id="clamp">CLAMP<a class="permalink" href="#clamp" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic numeric function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">clamp(&lt;value&gt;, &lt;low&gt;, &lt;high&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Restricts a value to an inclusive lower and upper bound.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#clamp"><code>clamp</code></a> accepts exactly three comparable values. Scenario code normally uses numbers and supplies a lower bound no greater than the upper bound. The function returns <code>low</code> when the value is below the range, <code>high</code> when above it, and the original value otherwise.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let burn = clamp(amount, 0, this.fuel)
+set this.fuel -= burn</code></pre>
+<pre><code class="language-muse">set player.score = clamp(player.score + bonus, 0, 100)</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#min"><code>min</code></a>, <a class="code-link" href="#max"><code>max</code></a>, <a class="code-link" href="#let"><code>let</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="desc">DESC<a class="permalink" href="#desc" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Description declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">desc &quot;&lt;text&gt;&quot;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Assigns inline descriptive text to a room, object, character, or goal.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#desc"><code>desc</code></a> is the short form of <a class="code-link" href="#description"><code>description</code></a>. In profile 0.1 the quoted text must appear on the same physical line. Description interpolation, conditional descriptions, multiline description blocks, and <code>desc random</code> are not implemented.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">room laboratory &quot;Laboratory&quot;
+  desc &quot;A practical workroom filled with test equipment.&quot;</code></pre>
+<pre><code class="language-muse">goal safe_landing
+  desc &quot;Land safely on the planet.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#description"><code>description</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#goal"><code>goal</code></a></p>
+<hr>
+<h2 id="description">DESCRIPTION<a class="permalink" href="#description" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Description declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">description &quot;&lt;text&gt;&quot;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Provides the long form of <a class="code-link" href="#desc"><code>desc</code></a>.</p>
+<p><strong>Remarks</strong></p>
+<p>For rooms, objects, and characters, <a class="code-link" href="#description"><code>description</code></a> and <a class="code-link" href="#desc"><code>desc</code></a> are synonyms. Goal children currently require the short <a class="code-link" href="#desc"><code>desc</code></a> form in the implemented parser. The inline-only limitations described under <a class="code-link" href="#desc"><code>desc</code></a> also apply.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object terminal in laboratory from device
+  description &quot;A battered terminal with yellowed keys.&quot;</code></pre>
+<pre><code class="language-muse">character guide in gallery
+  description &quot;A volunteer wearing an ACMS badge.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#desc"><code>desc</code></a>, <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#room"><code>room</code></a></p>
+<hr>
+<h2 id="elif">ELIF<a class="permalink" href="#elif" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Conditional statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">if &lt;expression&gt;
+  &lt;statements&gt;
+elif &lt;expression&gt;
+  &lt;statements&gt;
+[else
+  &lt;statements&gt;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Tests another condition when all preceding <a class="code-link" href="#if"><code>if</code></a> or <a class="code-link" href="#elif"><code>elif</code></a> conditions were false.</p>
+<p><strong>Remarks</strong></p>
+<p>Any number of <a class="code-link" href="#elif"><code>elif</code></a> branches may follow an <a class="code-link" href="#if"><code>if</code></a>. They must align with the matching <a class="code-link" href="#if"><code>if</code></a>. At most one branch executes: the first whose expression is truthy. <a class="code-link" href="#elif"><code>elif</code></a> cannot begin a conditional by itself.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if guess == this.code
+  say &quot;Correct.&quot;
+elif this.attempts &gt;= 3
+  say &quot;No attempts remain.&quot;
+else
+  say &quot;Try again.&quot;</code></pre>
+<pre><code class="language-muse">if this.temperature &gt; 100
+  say &quot;Too hot.&quot;
+elif this.temperature &lt; 0
+  say &quot;Too cold.&quot;
+else
+  say &quot;Temperature is normal.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#else"><code>else</code></a>, <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#not"><code>not</code></a></p>
+<hr>
+<h2 id="else">ELSE<a class="permalink" href="#else" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Conditional statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">if &lt;expression&gt;
+  &lt;statements&gt;
+[elif &lt;expression&gt;
+  &lt;statements&gt; ...]
+else
+  &lt;statements&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Provides a fallback branch when every preceding condition is false.</p>
+<p><strong>Remarks</strong></p>
+<p>Only one <a class="code-link" href="#else"><code>else</code></a> may occur and it must be last. It has no expression. Align it with its matching <a class="code-link" href="#if"><code>if</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if this.powered
+  say &quot;The display glows.&quot;
+else
+  say &quot;The display is dark.&quot;</code></pre>
+<pre><code class="language-muse">if value == 8
+  set player.score += 1
+else
+  say &quot;That answer is not correct.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#elif"><code>elif</code></a></p>
+<hr>
+<h2 id="end">END<a class="permalink" href="#end" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Flow-control statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">end</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns immediately from the current MuseLang execution pipeline with the distinct <code>ended</code> result.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#end"><code>end</code></a> is runtime flow control, not a structural block terminator. Indentation ends <a class="code-link" href="#if"><code>if</code></a>, verb, and routine blocks. Like <a class="code-link" href="#stop"><code>stop</code></a>, <a class="code-link" href="#end"><code>end</code></a> is a successful result: effects performed before it are committed. It does not end the shared world or complete a story. Most ordinary verbs should use <a class="code-link" href="#stop"><code>stop</code></a> for early rejection and need not use <a class="code-link" href="#end"><code>end</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if this.complete
+  say &quot;The sequence is already complete.&quot;
+  end</code></pre>
+<pre><code class="language-muse">routine report_once
+  say &quot;Report complete.&quot;
+  end</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#stop"><code>stop</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#achieve"><code>achieve</code></a></p>
+<hr>
+<h2 id="false">FALSE<a class="permalink" href="#false" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Boolean literal</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">false</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Represents the Boolean value false.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#false"><code>false</code></a> may initialise state, appear in expressions, and be assigned to state or locals. It is reserved and cannot be used as an argument or local name.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state powered = false
+state disabled = false</code></pre>
+<pre><code class="language-muse">set this.active = false
+say &quot;Active: {this.active}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#true"><code>true</code></a>, <a class="code-link" href="#not"><code>not</code></a>, <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="floor">FLOOR<a class="permalink" href="#floor" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic numeric function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">floor(&lt;numeric_expression&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the greatest integer less than or equal to its argument.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#floor"><code>floor</code></a> accepts exactly one finite number. For negative values it moves toward negative infinity.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let full_units = floor(this.resource / this.unit_size)</code></pre>
+<pre><code class="language-muse">say &quot;Completed whole hours: {floor(this.elapsed_hours)}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#ceil"><code>ceil</code></a>, <a class="code-link" href="#round"><code>round</code></a>, <a class="code-link" href="#abs"><code>abs</code></a></p>
+<hr>
+<h2 id="from">FROM<a class="permalink" href="#from" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Declaration connective keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">object &lt;id&gt; in &lt;room_id&gt; from &lt;type_id&gt; [&quot;Display Name&quot;]
+character &lt;id&gt; in &lt;room_id&gt; from &lt;type_id&gt; [&quot;Display Name&quot;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Records the type label associated with an object or character.</p>
+<p><strong>Remarks</strong></p>
+<p>Profile 0.1 recognises the built-in labels <code>thing</code>, <code>device</code>, <code>container</code>, <code>supporter</code>, <code>door</code>, <code>key</code>, and <code>portable_item</code>, as well as declared noun IDs. It records <code>type_id</code> in the compiled bundle but does not yet implement author-defined type blocks or inherited properties.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object console in gallery from device</code></pre>
+<pre><code class="language-muse">character technician in laboratory from thing &quot;Service Technician&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#in"><code>in</code></a></p>
+<hr>
+<h2 id="game">GAME<a class="permalink" href="#game" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace alias</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">game.&lt;state_name&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Provides an author-friendly alias for the <a class="code-link" href="#scenario"><code>scenario</code></a> state namespace.</p>
+<p><strong>Remarks</strong></p>
+<p>The compiler normalises a top-level <code>game.*</code> default to <code>scenario.*</code> in the bundle. At runtime both roots select the current scenario owner, which is the object exposing the verb in the standard adapter. Prefer <a class="code-link" href="#scenario"><code>scenario</code></a> in new source when the state describes a puzzle or interaction rather than a whole game.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state game.turn = 0</code></pre>
+<pre><code class="language-muse">set game.turn += 1
+say &quot;Turn: {game.turn}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#this"><code>this</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#world"><code>world</code></a></p>
+<hr>
+<h2 id="goal">GOAL<a class="permalink" href="#goal" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Top-level declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">goal &lt;goal_id&gt;
+  [desc &quot;&lt;description&gt;&quot;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares an achievement target that may later be awarded with <a class="code-link" href="#achieve"><code>achieve</code></a>.</p>
+<p><strong>Remarks</strong></p>
+<p>Goal IDs must be unique. A goal may have one optional <a class="code-link" href="#desc"><code>desc</code></a> child. The long <a class="code-link" href="#description"><code>description</code></a> spelling is not accepted inside a goal in profile 0.1. Declaring a goal does not automatically award it.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">goal safe_landing
+  desc &quot;Land safely on the planet.&quot;</code></pre>
+<pre><code class="language-muse">goal panel_unlocked
+
+object panel in laboratory from device
+  verb solve
+    achieve panel_unlocked</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#achieve"><code>achieve</code></a>, <a class="code-link" href="#desc"><code>desc</code></a>, <a class="code-link" href="#player"><code>player</code></a></p>
+<hr>
+<h2 id="have">HAVE<a class="permalink" href="#have" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Inventory predicate keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">have &lt;object_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Tests whether the current player&#x27;s immediate contents include an object with the named ID or alias.</p>
+<p><strong>Remarks</strong></p>
+<p>In profile 0.1, <a class="code-link" href="#have"><code>have</code></a> must form the complete condition. It cannot yet be used as one nested term in a larger <a class="code-link" href="#and"><code>and</code></a>/<a class="code-link" href="#or"><code>or</code></a> expression. The check examines the player&#x27;s immediate contents, not recursive contents inside carried containers.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if have badge
+  say &quot;You are carrying the badge.&quot;</code></pre>
+<pre><code class="language-muse">if have access_key
+  set this.locked = false
+else
+  say &quot;You need the access key.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#or"><code>or</code></a></p>
+<hr>
+<h2 id="hint">HINT<a class="permalink" href="#hint" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Text-output statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">hint &quot;&lt;interpolated_text&gt;&quot;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Sends guidance text to the current player.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#hint"><code>hint</code></a> accepts the same interpolation syntax as <a class="code-link" href="#say"><code>say</code></a>. In profile 0.1 both use the caller&#x27;s normal message channel, although the separate opcode permits a future client or narrator to render hints differently. Output is buffered until the command succeeds.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">hint &quot;Use THRUST followed by a number from 0 to 100.&quot;</code></pre>
+<pre><code class="language-muse">hint &quot;Fuel remaining: {this.fuel}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#say"><code>say</code></a>, <a class="code-link" href="#verb"><code>verb</code></a>, <a class="code-link" href="#stop"><code>stop</code></a></p>
+<hr>
+<h2 id="if">IF<a class="permalink" href="#if" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Conditional statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">if &lt;expression&gt;
+  &lt;statements&gt;
+[elif &lt;expression&gt;
+  &lt;statements&gt; ...]
+[else
+  &lt;statements&gt;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Executes statements conditionally.</p>
+<p><strong>Remarks</strong></p>
+<p>The first truthy branch executes. Indentation defines each branch. There is no structural <code>end if</code>. Locals declared within a branch remain confined to that branch. The <a class="code-link" href="#have"><code>have</code></a> predicate is accepted as a complete condition.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if not this.active
+  say &quot;The game is not active.&quot;
+  stop</code></pre>
+<pre><code class="language-muse">if roll == 6
+  set this.solved = true
+  achieve panel_unlocked
+else
+  say &quot;Nothing else happens.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#elif"><code>elif</code></a>, <a class="code-link" href="#else"><code>else</code></a>, <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#not"><code>not</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#stop"><code>stop</code></a></p>
+<hr>
+<h2 id="in">IN<a class="permalink" href="#in" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Declaration connective keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">object &lt;object_id&gt; in &lt;room_id&gt; ...
+character &lt;character_id&gt; in &lt;room_id&gt; ...</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Names the initial room containing an object or character.</p>
+<p><strong>Remarks</strong></p>
+<p>The room must already be declared somewhere in the combined source document. Profile 0.1 requires objects and characters to start in rooms. It does not yet support authored <a class="code-link" href="#in"><code>in</code></a> placement inside containers or use <a class="code-link" href="#in"><code>in</code></a> as an expression predicate.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object test_panel in laboratory from device</code></pre>
+<pre><code class="language-muse">character curator in gallery &quot;Museum Curator&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#from"><code>from</code></a>, <a class="code-link" href="#move"><code>move</code></a>, <a class="code-link" href="#to"><code>to</code></a></p>
+<hr>
+<h2 id="let">LET<a class="permalink" href="#let" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Local-declaration statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">let &lt;local_name&gt; = &lt;expression&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Calculates and stores a temporary value for the current invocation.</p>
+<p><strong>Remarks</strong></p>
+<p>A local is not persisted. It exists within the current verb, routine, or branch scope. Use <a class="code-link" href="#set"><code>set</code></a> to reassign an already declared local. A local cannot shadow an argument, reserved namespace, Boolean word, intrinsic function, declared noun ID, or another local in the same scope.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let burn = clamp(amount, 0, this.fuel)
+let lift = burn / 5</code></pre>
+<pre><code class="language-muse">let bonus = 0
+if player.score &gt;= 10
+  set bonus = 5
+set player.score += bonus</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#set"><code>set</code></a>, <a class="code-link" href="#verb"><code>verb</code></a>, <a class="code-link" href="#routine"><code>routine</code></a>, <a class="code-link" href="#if"><code>if</code></a></p>
+<hr>
+<h2 id="max">MAX<a class="permalink" href="#max" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic comparison function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">max(&lt;expression&gt; [, &lt;expression&gt; ...])</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the greatest supplied value.</p>
+<p><strong>Remarks</strong></p>
+<p>At least one argument is required. Values must be mutually comparable at runtime. Numeric use is recommended for scenario calculations.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let visible_score = max(player.score, 0)</code></pre>
+<pre><code class="language-muse">set this.highest_roll = max(this.highest_roll, roll)</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#min"><code>min</code></a>, <a class="code-link" href="#clamp"><code>clamp</code></a>, <a class="code-link" href="#abs"><code>abs</code></a></p>
+<hr>
+<h2 id="min">MIN<a class="permalink" href="#min" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic comparison function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">min(&lt;expression&gt; [, &lt;expression&gt; ...])</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the least supplied value.</p>
+<p><strong>Remarks</strong></p>
+<p>At least one argument is required. Values must be mutually comparable at runtime. Use <a class="code-link" href="#clamp"><code>clamp</code></a> when both a lower and upper bound must be enforced.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let burn = min(amount, this.fuel)</code></pre>
+<pre><code class="language-muse">set this.lowest_temperature = min(this.lowest_temperature, reading)</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#max"><code>max</code></a>, <a class="code-link" href="#clamp"><code>clamp</code></a>, <a class="code-link" href="#abs"><code>abs</code></a></p>
+<hr>
+<h2 id="move">MOVE<a class="permalink" href="#move" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">move player to &lt;destination_id&gt;
+move &lt;noun_id&gt; to &lt;destination_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Moves the current player or a declared noun to a resolved destination.</p>
+<p><strong>Remarks</strong></p>
+<p>The source and destination must resolve. Profile 0.1 does not yet enforce that the destination is specifically a room or container. Movement performed by this statement is included in MuseLang rollback if a later runtime error occurs.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">move player to surface</code></pre>
+<pre><code class="language-muse">move sample_capsule to laboratory
+say &quot;The capsule has been returned.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#to"><code>to</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#player"><code>player</code></a></p>
+<hr>
+<h2 id="not">NOT<a class="permalink" href="#not" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Unary Boolean word operator</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">not &lt;expression&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Reverses the truth value of an expression.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#not"><code>not</code></a> has higher precedence than multiplication, addition, comparisons, <a class="code-link" href="#and"><code>and</code></a>, and <a class="code-link" href="#or"><code>or</code></a>. It is reserved and cannot be used as an argument or local name.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if not this.active
+  say &quot;The game is stopped.&quot;</code></pre>
+<pre><code class="language-muse">let unavailable = not world.exhibit_power</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#true"><code>true</code></a>, <a class="code-link" href="#false"><code>false</code></a></p>
+<hr>
+<h2 id="obj">OBJ<a class="permalink" href="#obj" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Top-level declaration alias</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">obj &lt;object_id&gt; in &lt;room_id&gt; [from &lt;type_id&gt;] [&quot;Display Name&quot;]</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Provides the short form of <a class="code-link" href="#object"><code>object</code></a>.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#obj"><code>obj</code></a> and <a class="code-link" href="#object"><code>object</code></a> are exactly synonymous as declaration keywords. The longer form is usually clearer in manuals and new source.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">obj key in laboratory from key</code></pre>
+<pre><code class="language-muse">obj console in gallery from device &quot;Exhibit Console&quot;
+  alias panel</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#from"><code>from</code></a></p>
+<hr>
+<h2 id="object">OBJECT<a class="permalink" href="#object" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Top-level declaration keyword and argument type name</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">object &lt;object_id&gt; in &lt;room_id&gt; [from &lt;type_id&gt;] [&quot;Display Name&quot;]
+&lt;name:object&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares a non-character world noun; as an argument type, resolves an accessible object reference.</p>
+<p><strong>Remarks</strong></p>
+<p>An object may contain aliases, an inline description, local state, routines, and verbs. Its initial location must be a declared room. Object arguments are resolved at runtime and make the object available as a value, although most profile 0.1 statements still identify movement targets statically by ID.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object lander in orbit from device
+  state fuel = 500</code></pre>
+<pre><code class="language-muse">verb inspect_target &lt;target:object&gt;
+  say &quot;A target was selected.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#obj"><code>obj</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#room"><code>room</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#from"><code>from</code></a>, Appendix A</p>
+<hr>
+<h2 id="or">OR<a class="permalink" href="#or" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Boolean word operator</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">&lt;left_expression&gt; or &lt;right_expression&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Produces true when either operand is truthy.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#or"><code>or</code></a> evaluates left to right and short-circuits: when the left operand is true, the right operand is not evaluated. It has lower precedence than <a class="code-link" href="#and"><code>and</code></a>. The special <a class="code-link" href="#have"><code>have</code></a> predicate cannot currently be nested as one operand of <a class="code-link" href="#or"><code>or</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if this.disabled or not world.exhibit_power
+  say &quot;The exhibit is unavailable.&quot;</code></pre>
+<pre><code class="language-muse">if amount &lt; 0 or amount &gt; 100
+  say &quot;Amount must be between 0 and 100.&quot;
+  stop</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#not"><code>not</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#true"><code>true</code></a>, <a class="code-link" href="#false"><code>false</code></a></p>
+<hr>
+<h2 id="player">PLAYER<a class="permalink" href="#player" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace and movement source</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">player.&lt;state_name&gt;
+move player to &lt;destination_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Refers to state owned by the current player, or to the player as the source of a movement statement.</p>
+<p><strong>Remarks</strong></p>
+<p>Declare player defaults at top level. Each player receives an independent value. The namespace is reserved and cannot be used as an argument or local name.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state player.score = 0
+
+verb award
+  set player.score += 10
+  say &quot;Score: {player.score}.&quot;</code></pre>
+<pre><code class="language-muse">if this.landed
+  move player to surface</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#team"><code>team</code></a>, <a class="code-link" href="#world"><code>world</code></a>, <a class="code-link" href="#move"><code>move</code></a>, <a class="code-link" href="#achieve"><code>achieve</code></a></p>
+<hr>
+<h2 id="random_chance">RANDOM_CHANCE<a class="permalink" href="#random_chance" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic random function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">random_chance(&lt;percentage&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns true with the supplied percentage probability.</p>
+<p><strong>Remarks</strong></p>
+<p>The percentage must be numeric and between 0 and 100 inclusive. A constant outside that range is rejected during validation; a calculated invalid value is a safe runtime error. The function advances the scenario owner&#x27;s PRNG only when it is actually evaluated. Boolean short-circuiting can therefore affect the random sequence.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if random_chance(25)
+  say &quot;A warning lamp flickers.&quot;</code></pre>
+<pre><code class="language-muse">let success = random_chance(this.success_percent)
+if success
+  set this.solved = true</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#random_int"><code>random_int</code></a>, <a class="code-link" href="#random_choice"><code>random_choice</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a></p>
+<hr>
+<h2 id="random_choice">RANDOM_CHOICE<a class="permalink" href="#random_choice" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic random function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">random_choice(&lt;expression&gt; [, &lt;expression&gt; ...])</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns one randomly selected supplied value.</p>
+<p><strong>Remarks</strong></p>
+<p>At least one argument is required. The function chooses uniformly by argument position. Use scalar values that can be stored or displayed by the scenario.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">set this.weather = random_choice(&quot;clear&quot;, &quot;cloudy&quot;, &quot;rain&quot;)</code></pre>
+<pre><code class="language-muse">let message_number = random_choice(1, 2, 3)
+say &quot;Selected message {message_number}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#random_int"><code>random_int</code></a>, <a class="code-link" href="#random_chance"><code>random_chance</code></a>, <a class="code-link" href="#set"><code>set</code></a>, <a class="code-link" href="#let"><code>let</code></a></p>
+<hr>
+<h2 id="random_int">RANDOM_INT<a class="permalink" href="#random_int" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic random function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">random_int(&lt;low&gt;, &lt;high&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns a uniformly selected integer in an inclusive range.</p>
+<p><strong>Remarks</strong></p>
+<p>Both endpoints are converted to integers by the runtime. The low endpoint must not exceed the high endpoint. The result and changed PRNG state are rolled back if the command later fails.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let roll = random_int(1, 6)
+say &quot;The die rolls {roll}.&quot;</code></pre>
+<pre><code class="language-muse">set player.score += random_int(1, 10)</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#random_chance"><code>random_chance</code></a>, <a class="code-link" href="#random_choice"><code>random_choice</code></a>, <a class="code-link" href="#let"><code>let</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="real">REAL<a class="permalink" href="#real" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Read-only state namespace</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">real.now
+real.date
+real.time</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Reads the real-world date and time snapshot supplied for the current command.</p>
+<p><strong>Remarks</strong></p>
+<p>The standard Evennia adapter snapshots these three values once when the command begins. <code>real.*</code> cannot be declared or assigned. Using real time makes replay depend on captured external inputs; profile 0.1 replay records do not yet persist these values automatically.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">say &quot;Today&#x27;s date is {real.date}.&quot;</code></pre>
+<pre><code class="language-muse">say &quot;The command began at {real.time}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#world"><code>world</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#say"><code>say</code></a>, <a class="code-link" href="#state"><code>state</code></a></p>
+<hr>
+<h2 id="room">ROOM<a class="permalink" href="#room" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Top-level declaration keyword and argument type name</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">room &lt;room_id&gt; [&quot;Display Name&quot;]
+&lt;name:room&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares a room; as an argument type, resolves an accessible object intended to represent a room.</p>
+<p><strong>Remarks</strong></p>
+<p>Rooms are flat in profile 0.1. They may contain aliases, an inline description, local state, routines, and verbs. Exit and nested-room syntax is not implemented. A <a class="code-link" href="#room"><code>room</code></a> argument currently resolves an accessible object without enforcing its kind.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">room orbit &quot;Command Module&quot;
+  desc &quot;The planet fills the lower viewport.&quot;</code></pre>
+<pre><code class="language-muse">verb select_room &lt;destination:room&gt;
+  say &quot;A destination was selected.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#object"><code>object</code></a>, <a class="code-link" href="#character"><code>character</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#move"><code>move</code></a>, Appendix A</p>
+<hr>
+<h2 id="round">ROUND<a class="permalink" href="#round" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Intrinsic numeric function</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">round(&lt;numeric_expression&gt;)</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns the nearest integer.</p>
+<p><strong>Remarks</strong></p>
+<p>Half values round away from zero: <code>round(2.5)</code> is 3 and <code>round(-2.5)</code> is -3. This differs from Python&#x27;s ordinary built-in <a class="code-link" href="#round"><code>round</code></a>, which is not exposed directly. Exactly one finite number is required.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">let displayed_speed = round(abs(this.velocity))</code></pre>
+<pre><code class="language-muse">say &quot;Average score: {round(this.total / this.count)}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#floor"><code>floor</code></a>, <a class="code-link" href="#ceil"><code>ceil</code></a>, <a class="code-link" href="#abs"><code>abs</code></a></p>
+<hr>
+<h2 id="routine">ROUTINE<a class="permalink" href="#routine" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Noun child declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">routine &lt;routine_id&gt;
+  &lt;statements&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares a reusable object-local statement block that is not a player command.</p>
+<p><strong>Remarks</strong></p>
+<p>Routines have no parameters or return values. They are validated independently and cannot depend on a calling verb&#x27;s arguments or locals. Use declared state and routine-local <a class="code-link" href="#let"><code>let</code></a> values. Direct and indirect local recursion are rejected; runtime call depth is also limited to 32.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">routine status
+  say &quot;Fuel: {this.fuel}.&quot;
+  say &quot;Turn: {this.turn}.&quot;</code></pre>
+<pre><code class="language-muse">routine reset
+  set this.score = 0
+  set this.turn = 0</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#run"><code>run</code></a>, <a class="code-link" href="#verb"><code>verb</code></a>, <a class="code-link" href="#let"><code>let</code></a>, <a class="code-link" href="#this"><code>this</code></a></p>
+<hr>
+<h2 id="run">RUN<a class="permalink" href="#run" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">run &lt;routine_id&gt;
+run this.&lt;routine_id&gt;
+run &lt;noun_id&gt;.&lt;routine_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Invokes a declared routine.</p>
+<p><strong>Remarks</strong></p>
+<p>An unqualified call uses the current noun&#x27;s routine table. A qualified call binds <a class="code-link" href="#this"><code>this</code></a> to the named owner while the routine executes. A <a class="code-link" href="#stop"><code>stop</code></a> or <a class="code-link" href="#end"><code>end</code></a> inside the routine propagates to the calling program.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">verb status
+  run status_report</code></pre>
+<pre><code class="language-muse">verb inspect_lander
+  run lander.status</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#routine"><code>routine</code></a>, <a class="code-link" href="#this"><code>this</code></a>, <a class="code-link" href="#stop"><code>stop</code></a>, <a class="code-link" href="#end"><code>end</code></a></p>
+<hr>
+<h2 id="say">SAY<a class="permalink" href="#say" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Text-output statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">say &quot;&lt;interpolated_text&gt;&quot;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Sends normal scenario text to the current player.</p>
+<p><strong>Remarks</strong></p>
+<p>Expressions inside <code>{</code> and <code>}</code> are evaluated and converted to text. Use <code>{{</code> and <code>}}</code> for literal braces. Output is buffered until successful command completion and discarded on a later runtime error. Multiline and <code>say random</code> forms are not implemented.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">say &quot;Fuel: {this.fuel} units.&quot;</code></pre>
+<pre><code class="language-muse">say &quot;Use braces like this: {{example}}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#hint"><code>hint</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#real"><code>real</code></a></p>
+<hr>
+<h2 id="scenario">SCENARIO<a class="permalink" href="#scenario" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">scenario.&lt;state_name&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Reads or writes state owned by the current scenario context.</p>
+<p><strong>Remarks</strong></p>
+<p>In the standard profile 0.1 Evennia adapter, the object exposing the verb is the scenario owner. Thus <code>scenario.*</code> and <code>this.*</code> normally select the same physical object during an object verb, although they express different author intent. <a class="code-link" href="#game"><code>game</code></a> is an alias. A future scenario-instance service may change the owner without changing source syntax.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state scenario.turn = 0</code></pre>
+<pre><code class="language-muse">set scenario.turn += 1
+say &quot;Scenario turn: {scenario.turn}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#game"><code>game</code></a>, <a class="code-link" href="#this"><code>this</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#team"><code>team</code></a>, <a class="code-link" href="#world"><code>world</code></a>, <a class="code-link" href="#state"><code>state</code></a></p>
+<hr>
+<h2 id="set">SET<a class="permalink" href="#set" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Assignment statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">set &lt;target&gt; = &lt;expression&gt;
+set &lt;target&gt; += &lt;expression&gt;
+set &lt;target&gt; -= &lt;expression&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Assigns a value to persistent state or reassigns an existing local.</p>
+<p><strong>Remarks</strong></p>
+<p>Qualified targets select state. An unqualified target must name a local already declared with <a class="code-link" href="#let"><code>let</code></a>. Arguments and <code>real.*</code> are read-only. <code>+=</code> and <code>-=</code> require an existing numeric value. Object state must have been declared before it is assigned. MuseLang-managed assignments are rolled back on a later runtime error.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">set this.fuel -= burn
+set this.turn += 1</code></pre>
+<pre><code class="language-muse">let bonus = 0
+set bonus = 5
+set player.score += bonus</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#let"><code>let</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#world"><code>world</code></a></p>
+<hr>
+<h2 id="state">STATE<a class="permalink" href="#state" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">state &lt;local_state_name&gt; = &lt;literal&gt;
+state &lt;writable_namespace&gt;.&lt;state_name&gt; = &lt;literal&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares persistent scalar state and its initial value.</p>
+<p><strong>Remarks</strong></p>
+<p>Inside a room, object, or character, use an unqualified state name. At top level, use <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#team"><code>team</code></a>, <a class="code-link" href="#game"><code>game</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, or <a class="code-link" href="#world"><code>world</code></a>. Initial values must be literal Booleans, integers, floats, or strings; expressions are not allowed. Defaults do not overwrite an existing runtime value.</p>
+<p><a class="code-link" href="#real"><code>real</code></a> is read-only and cannot be declared. <a class="code-link" href="#this"><code>this</code></a> and noun IDs are not valid top-level declaration roots.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">object lander in orbit from device
+  state fuel = 500
+  state active = false</code></pre>
+<pre><code class="language-muse">state player.score = 0
+state world.exhibit_power = false</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#set"><code>set</code></a>, <a class="code-link" href="#this"><code>this</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#team"><code>team</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#world"><code>world</code></a></p>
+<hr>
+<h2 id="stop">STOP<a class="permalink" href="#stop" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Flow-control statement keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">stop</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Returns immediately from the current MuseLang program, normally after rejecting a command.</p>
+<p><strong>Remarks</strong></p>
+<p>Statements after <a class="code-link" href="#stop"><code>stop</code></a> do not execute. <a class="code-link" href="#stop"><code>stop</code></a> is a successful scripted result, so earlier state changes and buffered messages are committed. Place it before turn-consuming mutations when rejection should leave the scenario unchanged. A <a class="code-link" href="#stop"><code>stop</code></a> inside a routine propagates to its caller.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if not this.active
+  say &quot;Start the game first.&quot;
+  stop</code></pre>
+<pre><code class="language-muse">if amount &lt; 0 or amount &gt; 100
+  say &quot;Amount must be between 0 and 100.&quot;
+  stop
+set this.turn += 1</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#end"><code>end</code></a>, <a class="code-link" href="#if"><code>if</code></a>, <a class="code-link" href="#verb"><code>verb</code></a>, <a class="code-link" href="#run"><code>run</code></a></p>
+<hr>
+<h2 id="team">TEAM<a class="permalink" href="#team" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">team.&lt;state_name&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Reads or writes state shared by the current player&#x27;s configured team.</p>
+<p><strong>Remarks</strong></p>
+<p>Trusted runtime setup must assign a team object to the player&#x27;s <code>db.muselang_team</code> field. Without a team owner, reading produces no value and writing causes a safe runtime error. Declare team defaults at top level.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state team.rounds_won = 0</code></pre>
+<pre><code class="language-muse">set team.rounds_won += 1
+say &quot;Team wins: {team.rounds_won}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#world"><code>world</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="this">THIS<a class="permalink" href="#this" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace and routine-owner word</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">this.&lt;state_name&gt;
+run this.&lt;routine_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Refers to the noun currently owning the executing verb or routine.</p>
+<p><strong>Remarks</strong></p>
+<p>Inside an ordinary object verb, <a class="code-link" href="#this"><code>this</code></a> is that object. In a qualified routine call such as <code>run lander.status</code>, <a class="code-link" href="#this"><code>this</code></a> becomes <code>lander</code> for the routine. State named through <a class="code-link" href="#this"><code>this</code></a> must have been declared on the owning noun.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">if this.fuel &lt;= 0
+  say &quot;The tank is empty.&quot;</code></pre>
+<pre><code class="language-muse">set this.active = true
+run this.status</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#routine"><code>routine</code></a>, <a class="code-link" href="#run"><code>run</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="to">TO<a class="permalink" href="#to" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Movement connective keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">move &lt;source&gt; to &lt;destination_id&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Separates the movement source from its destination.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#to"><code>to</code></a> is currently used only by <a class="code-link" href="#move"><code>move</code></a>. It is not accepted as part of a natural verb grammar such as <code>verb give &lt;item&gt; to &lt;recipient&gt;</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">move player to surface</code></pre>
+<pre><code class="language-muse">move capsule to laboratory</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#move"><code>move</code></a>, <a class="code-link" href="#in"><code>in</code></a>, <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#room"><code>room</code></a></p>
+<hr>
+<h2 id="true">TRUE<a class="permalink" href="#true" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Boolean literal</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">true</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Represents the Boolean value true.</p>
+<p><strong>Remarks</strong></p>
+<p><a class="code-link" href="#true"><code>true</code></a> may initialise state, appear in expressions, and be assigned to state or locals. It is reserved and cannot be used as an argument or local name.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state locked = true
+state visible = true</code></pre>
+<pre><code class="language-muse">set this.powered = true
+say &quot;Powered: {this.powered}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#false"><code>false</code></a>, <a class="code-link" href="#not"><code>not</code></a>, <a class="code-link" href="#and"><code>and</code></a>, <a class="code-link" href="#or"><code>or</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="verb">VERB<a class="permalink" href="#verb" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Noun child declaration keyword</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">verb &lt;verb_name&gt; [&lt;argument_declaration&gt; ...]
+  &lt;statements&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Declares a player command attached to a room, object, or character.</p>
+<p><strong>Remarks</strong></p>
+<p>Arguments are positional and read-only. An omitted type means <code>word</code>. Optional and <code>string</code> arguments must be last. The standard Evennia adapter strips an optional target noun from the beginning or end of command arguments before binding them. Profile 0.1 does not support verb aliases or literal grammar words between arguments.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">verb status
+  say &quot;Fuel: {this.fuel}.&quot;</code></pre>
+<pre><code class="language-muse">verb thrust &lt;amount:int&gt;
+  if amount &lt; 0 or amount &gt; 100
+    say &quot;Invalid thrust.&quot;
+    stop
+  set this.fuel -= amount</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#routine"><code>routine</code></a>, <a class="code-link" href="#let"><code>let</code></a>, <a class="code-link" href="#set"><code>set</code></a>, <a class="code-link" href="#stop"><code>stop</code></a>, Appendix A</p>
+<hr>
+<h2 id="world">WORLD<a class="permalink" href="#world" aria-label="Link to this section">#</a></h2>
+<p class="back-to-index"><a href="#alphabetical-index">&uarr; Back to alphabetical index</a></p>
+<p><strong>Kind:</strong> Reserved state namespace</p>
+<p><strong>Syntax</strong></p>
+<pre><code class="language-muse">world.&lt;state_name&gt;</code></pre>
+<p><strong>Purpose</strong></p>
+<p>Reads or writes state shared by every player and scenario in the Evennia world.</p>
+<p><strong>Remarks</strong></p>
+<p>The standard adapter stores world fields through Evennia <code>ServerConfig</code> using the <code>muselang.world.</code> key prefix. Use this scope deliberately: a write by one player is visible to all. Declare defaults at top level.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-muse">state world.exhibit_power = false</code></pre>
+<pre><code class="language-muse">set world.exhibit_power = true
+say &quot;Shared exhibit power: {world.exhibit_power}.&quot;</code></pre>
+<p><strong>See also:</strong> <a class="code-link" href="#player"><code>player</code></a>, <a class="code-link" href="#team"><code>team</code></a>, <a class="code-link" href="#scenario"><code>scenario</code></a>, <a class="code-link" href="#real"><code>real</code></a>, <a class="code-link" href="#state"><code>state</code></a>, <a class="code-link" href="#set"><code>set</code></a></p>
+<hr>
+<h2 id="appendix-a-verb-argument-type-specifiers">Appendix A: Verb Argument Type Specifiers<a class="permalink" href="#appendix-a-verb-argument-type-specifiers" aria-label="Link to this section">#</a></h2>
+<p>Type specifiers appear after a colon inside a verb argument declaration. They are listed alphabetically here. They are not statement keywords.</p>
+<h3 id="bool">BOOL<a class="permalink" href="#bool" aria-label="Link to this section">#</a></h3>
+<p>Accepts exactly <a class="code-link" href="#true"><code>true</code></a> or <a class="code-link" href="#false"><code>false</code></a> from player input.</p>
+<pre><code class="language-muse">verb enable &lt;value:bool&gt;
+  set this.enabled = value</code></pre>
+<pre><code class="language-muse">verb set_alarm &lt;active:bool&gt;
+  say &quot;Alarm requested: {active}.&quot;</code></pre>
+<h3 id="char-2">CHAR<a class="permalink" href="#char-2" aria-label="Link to this section">#</a></h3>
+<p>Resolves an accessible object intended to be a character. Character kind is not yet enforced.</p>
+<pre><code class="language-muse">verb identify &lt;person:char&gt;
+  say &quot;A person was selected.&quot;</code></pre>
+<pre><code class="language-muse">verb greet_target &lt;target:char?&gt;
+  say &quot;Greeting command accepted.&quot;</code></pre>
+<h3 id="float">FLOAT<a class="permalink" href="#float" aria-label="Link to this section">#</a></h3>
+<p>Converts input to a floating-point number.</p>
+<pre><code class="language-muse">verb tune &lt;frequency:float&gt;
+  set this.frequency = frequency</code></pre>
+<pre><code class="language-muse">verb calibrate &lt;offset:float&gt;
+  say &quot;Offset: {offset}.&quot;</code></pre>
+<h3 id="id">ID<a class="permalink" href="#id" aria-label="Link to this section">#</a></h3>
+<p>Accepts one token as an unconverted string identifier.</p>
+<pre><code class="language-muse">verb select &lt;item_id:id&gt;
+  say &quot;Selected ID: {item_id}.&quot;</code></pre>
+<pre><code class="language-muse">verb mode &lt;mode_id:id?&gt;
+  say &quot;Mode request received.&quot;</code></pre>
+<h3 id="int">INT<a class="permalink" href="#int" aria-label="Link to this section">#</a></h3>
+<p>Converts input to an integer. Decimal input such as <code>3.5</code> is rejected.</p>
+<pre><code class="language-muse">verb thrust &lt;amount:int&gt;
+  set this.fuel -= amount</code></pre>
+<pre><code class="language-muse">verb answer &lt;value:int&gt;
+  if value == 8
+    say &quot;Correct.&quot;</code></pre>
+<h3 id="number">NUMBER<a class="permalink" href="#number" aria-label="Link to this section">#</a></h3>
+<p>Converts input to an integer when possible, otherwise to a float when decimal or exponent notation is present.</p>
+<pre><code class="language-muse">verb add &lt;value:number&gt;
+  set this.total += value</code></pre>
+<pre><code class="language-muse">verb measure &lt;reading:number&gt;
+  say &quot;Reading: {reading}.&quot;</code></pre>
+<h3 id="object-2">OBJECT<a class="permalink" href="#object-2" aria-label="Link to this section">#</a></h3>
+<p>Resolves an accessible object of any kind.</p>
+<pre><code class="language-muse">verb inspect_target &lt;target:object&gt;
+  say &quot;Target resolved.&quot;</code></pre>
+<pre><code class="language-muse">verb choose &lt;target:object?&gt;
+  say &quot;Choice recorded.&quot;</code></pre>
+<h3 id="room-2">ROOM<a class="permalink" href="#room-2" aria-label="Link to this section">#</a></h3>
+<p>Resolves an accessible object intended to be a room. Room kind is not yet enforced.</p>
+<pre><code class="language-muse">verb destination &lt;place:room&gt;
+  say &quot;Destination selected.&quot;</code></pre>
+<pre><code class="language-muse">verb compare_room &lt;place:room?&gt;
+  say &quot;Room comparison requested.&quot;</code></pre>
+<h3 id="string">STRING<a class="permalink" href="#string" aria-label="Link to this section">#</a></h3>
+<p>Consumes all remaining command words and joins them with spaces. It must be the last argument.</p>
+<pre><code class="language-muse">verb enter_message &lt;message:string&gt;
+  say &quot;Message: {message}.&quot;</code></pre>
+<pre><code class="language-muse">verb label &lt;text:string?&gt;
+  say &quot;Label command accepted.&quot;</code></pre>
+<h3 id="word">WORD<a class="permalink" href="#word" aria-label="Link to this section">#</a></h3>
+<p>Accepts one word. This is the default when no type is written.</p>
+<pre><code class="language-muse">verb guess &lt;answer:word&gt;
+  say &quot;You guessed {answer}.&quot;</code></pre>
+<pre><code class="language-muse">verb colour &lt;name&gt;
+  say &quot;Colour: {name}.&quot;</code></pre>
+<h2 id="appendix-b-symbolic-operators">Appendix B: Symbolic Operators<a class="permalink" href="#appendix-b-symbolic-operators" aria-label="Link to this section">#</a></h2>
+<p>The following are operators rather than alphabetic keywords:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Operator</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>=</code></td><td>assignment in <a class="code-link" href="#let"><code>let</code></a> and <a class="code-link" href="#set"><code>set</code></a> statements</td><td><code>set this.score = 0</code></td></tr>
+<tr><td><code>+=</code></td><td>numeric compound addition</td><td><code>set this.turn += 1</code></td></tr>
+<tr><td><code>-=</code></td><td>numeric compound subtraction</td><td><code>set this.fuel -= burn</code></td></tr>
+<tr><td><code>+</code></td><td>numeric addition</td><td><code>let total = a + b</code></td></tr>
+<tr><td><code>-</code></td><td>subtraction or unary negation</td><td><code>let delta = a - b</code></td></tr>
+<tr><td><code>*</code></td><td>multiplication</td><td><code>let area = width * height</code></td></tr>
+<tr><td><code>/</code></td><td>division</td><td><code>let average = total / count</code></td></tr>
+<tr><td><code>//</code></td><td>integer/floor division</td><td><code>let groups = total // size</code></td></tr>
+<tr><td><code>%</code></td><td>modulo</td><td><code>let remainder = total % size</code></td></tr>
+<tr><td><code>==</code></td><td>equality comparison</td><td><code>if guess == this.code</code></td></tr>
+<tr><td><code>!=</code></td><td>inequality comparison</td><td><code>if value != 0</code></td></tr>
+<tr><td><code>&gt;</code></td><td>greater than</td><td><code>if score &gt; 10</code></td></tr>
+<tr><td><code>&gt;=</code></td><td>greater than or equal</td><td><code>if score &gt;= 10</code></td></tr>
+<tr><td><code>&lt;</code></td><td>less than</td><td><code>if amount &lt; 0</code></td></tr>
+<tr><td><code>&lt;=</code></td><td>less than or equal</td><td><code>if speed &lt;= this.safe_speed</code></td></tr>
+<tr><td><code>( )</code></td><td>expression grouping and function call</td><td><code>abs(this.velocity)</code></td></tr>
+<tr><td><code>{ }</code></td><td>interpolation inside quoted output</td><td><code>say &quot;Score: {player.score}.&quot;</code></td></tr>
+<tr><td><code>{{ }}</code></td><td>literal interpolation braces</td><td><code>say &quot;Use {{name}}.&quot;</code></td></tr>
+</tbody>
+</table></div>
+<h2 id="appendix-c-words-not-implemented-in-profile-0-1">Appendix C: Words Not Implemented in Profile 0.1<a class="permalink" href="#appendix-c-words-not-implemented-in-profile-0-1" aria-label="Link to this section">#</a></h2>
+<p>The wider MuseLang3 design discusses words such as <code>type</code>, <code>exit</code>, <code>rule</code>, <code>before</code>, <code>after</code>, <code>on</code>, <code>time</code>, <code>dialogue</code>, <code>node</code>, and <code>option</code>. They are not keywords accepted by the standalone profile 0.1 compiler. General <code>while</code>, <code>until</code>, and <code>for</code> loops are also deliberately absent.</p>
+</main>
+</body>
+</html>

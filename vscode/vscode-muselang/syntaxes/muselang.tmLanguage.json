@@ -48,7 +48,7 @@
     "headers": {
       "patterns": [
         {
-          "match": "^(\\s*)(room|type|object|obj|character|char|rule|verb|dialogue|node|goal|time|exit)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "match": "^(\\s*)(room|object|character|goal|routine|verb|state|array)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
           "captures": {
             "2": {
               "name": "keyword.declaration.muselang"
@@ -63,7 +63,7 @@
     "header_forms": {
       "patterns": [
         {
-          "match": "^(\\s*exit\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+to\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+via\\s+[A-Za-z_][A-Za-z0-9_]*)?",
+          "match": "^(\\s*object\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+in\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s+from\\s+[A-Za-z_][A-Za-z0-9_]*)?",
           "captures": {
             "1": {
               "name": "keyword.declaration.muselang"
@@ -83,7 +83,7 @@
           }
         },
         {
-          "match": "^(\\s*)(desc|description|say|hint)\\b(\\s+random\\b)?",
+          "match": "^(\\s*)(desc|say|hint|let|set|run|move|achieve|call|stop|end)\\b",
           "captures": {
             "2": {
               "name": "keyword.declaration.muselang"
@@ -94,7 +94,7 @@
           }
         },
         {
-          "match": "^(\\s*)(if|elif|else|while|until)\\b",
+          "match": "^(\\s*)(if|elif|else|for)\\b",
           "captures": {
             "2": {
               "name": "keyword.control.muselang"
@@ -106,7 +106,7 @@
     "properties": {
       "patterns": [
         {
-          "match": "\\b(alias|desc|description|tag|state|portable|visible|from|in|on|of|to|via)\\b",
+          "match": "\\b(alias|desc|state|array|from|in|to|step|player|team|scenario|game|world|this|real)\\b",
           "name": "keyword.other.muselang"
         }
       ]
@@ -114,11 +114,11 @@
     "keywords": {
       "patterns": [
         {
-          "match": "\\b(if|elif|else|while|until|before|after|say|hint|set|move|place|give|show|hide|goto|call|end|option)\\b",
+          "match": "\\b(if|elif|else|for|say|hint|let|set|run|move|achieve|call|stop|end)\\b",
           "name": "keyword.control.muselang"
         },
         {
-          "match": "\\b(not|and|or|is)\\b",
+          "match": "\\b(not|and|or)\\b",
           "name": "keyword.operator.word.muselang"
         },
         {
@@ -138,7 +138,7 @@
     "operators": {
       "patterns": [
         {
-          "match": "==|!=|>=|<=|->|=|\\+\\=|-\\=",
+          "match": "==|!=|>=|<=|=|\\+\\=|-\\=|\\*\\=|/\\=|\\+|-|\\*|/",
           "name": "keyword.operator.muselang"
         }
       ]
