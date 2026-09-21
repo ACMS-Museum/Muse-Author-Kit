@@ -1,0 +1,866 @@
+# Haunted House
+#
+# This source recreates the classic Haunted House adventure from
+# "Write Your Own Adventure Programs" in MuseLang. The room layout,
+# objects, treasures and puzzle structure closely follow the original
+# BASIC program.
+#
+# A PDF of the book is available:
+# https://usborne.com/au/books/computer-and-coding-books
+#
+# The original game relies on several features which are not currently
+# available in MuseLang V1, including:
+#
+#   * conditional exits (doors, barriers and hazards which dynamically
+#     enable or disable movement)
+#   * random events and probabilistic encounters
+#   * arithmetic variables and score calculations
+#   * turn counters and timers
+#   * global verb definitions independent of objects
+#
+# Where these mechanics are required, they have been expressed using the
+# facilities currently available in MuseLang, primarily object state,
+# object interactions and descriptive text. This keeps the adventure
+# playable while remaining a useful reference for future MuseLang
+# language development.
+
+room hidden_store "Hidden Store"
+  desc "This disconnected room holds objects which have not yet been discovered."
+
+room room_00 "Dark Corner"
+  alias "location 0"
+  desc "You are at dark corner."
+  exit south to room_08
+    alias s
+  exit east to room_01
+    alias e
+
+room room_01 "Overgrown Garden"
+  alias "location 1"
+  desc "You are at overgrown garden."
+  exit west to room_00
+    alias w
+  exit east to room_02
+    alias e
+
+room room_02 "By Large Woodpile"
+  alias "location 2"
+  desc "You are at by large woodpile."
+  exit west to room_01
+    alias w
+  exit east to room_03
+    alias e
+
+room room_03 "Yard by Rubbish"
+  alias "location 3"
+  desc "You are at yard by rubbish."
+  exit south to room_11
+    alias s
+  exit west to room_02
+    alias w
+  exit east to room_04
+    alias e
+
+room room_04 "Weedpatch"
+  alias "location 4"
+  desc "You are at weedpatch."
+  exit west to room_03
+    alias w
+  exit east to room_05
+    alias e
+
+room room_05 "Forest"
+  alias "location 5"
+  desc "You are at forest."
+  exit west to room_04
+    alias w
+  exit east to room_06
+    alias e
+
+room room_06 "Thick Forest"
+  alias "location 6"
+  desc "You are at thick forest."
+  exit south to room_14
+    alias s
+  exit west to room_05
+    alias w
+  exit east to room_07
+    alias e
+
+room room_07 "Blasted Tree"
+  alias "location 7"
+  desc "You are at blasted tree."
+  exit west to room_06
+    alias w
+  exit south to room_15
+    alias s
+
+room room_08 "Corner of House"
+  alias "location 8"
+  desc "You are at corner of house."
+  exit north to room_00
+    alias n
+  exit south to room_16
+    alias s
+
+room room_09 "Entrance to Kitchen"
+  alias "location 9"
+  desc "You are at entrance to kitchen."
+  exit south to room_17
+    alias s
+  exit east to room_10
+    alias e
+
+room room_10 "Kitchen and Grimy Cooker"
+  alias "location 10"
+  desc "You are at kitchen and grimy cooker."
+  exit west to room_09
+    alias w
+  exit east to room_11
+    alias e
+
+room room_11 "Scullery Door"
+  alias "location 11"
+  desc "You are at scullery door."
+  exit north to room_03
+    alias n
+  exit west to room_10
+    alias w
+
+room room_12 "Room with Inches of Dust"
+  alias "location 12"
+  desc "You are at room with inches of dust."
+  exit south to room_20
+    alias s
+  exit east to room_13
+    alias e
+
+room room_13 "Rear Turret Room"
+  alias "location 13"
+  desc "You are at rear turret room."
+  exit west to room_12
+    alias w
+
+room room_14 "Clearing by House"
+  alias "location 14"
+  desc "You are at clearing by house."
+  exit north to room_06
+    alias n
+  exit east to room_15
+    alias e
+
+room room_15 "Path"
+  alias "location 15"
+  desc "You are at path."
+  exit north to room_07
+    alias n
+  exit south to room_23
+    alias s
+  exit west to room_14
+    alias w
+
+room room_16 "Side of House"
+  alias "location 16"
+  desc "You are at side of house."
+  exit north to room_08
+    alias n
+  exit south to room_24
+    alias s
+
+room room_17 "Back of Hallway"
+  alias "location 17"
+  desc "You are at back of hallway."
+  exit north to room_09
+    alias n
+  exit south to room_25
+    alias s
+
+room room_18 "Dark Alcove"
+  alias "location 18"
+  desc "You are at dark alcove."
+  exit south to room_26
+    alias s
+  exit east to room_19
+    alias e
+
+room room_19 "Small Dark Room"
+  alias "location 19"
+  desc "You are at small dark room."
+  exit west to room_18
+    alias w
+  exit east to room_20
+    alias e
+
+room room_20 "Bottom of Spiral Staircase"
+  alias "location 20"
+  desc "You are at bottom of spiral staircase."
+  exit north to room_12
+    alias n
+  exit west to room_19
+    alias w
+  exit up to room_21
+    alias u
+  exit down to room_12
+    alias d
+
+room room_21 "Wide Passage"
+  alias "location 21"
+  desc "You are at wide passage."
+  exit south to room_29
+    alias s
+  exit east to room_22
+    alias e
+
+room room_22 "Slippery Steps"
+  alias "location 22"
+  desc "You are at slippery steps."
+  exit west to room_21
+    alias w
+  exit south to room_30
+    alias s
+  exit up to room_21
+    alias u
+  exit down to room_30
+    alias d
+
+room room_23 "Clifftop"
+  alias "location 23"
+  desc "You are at clifftop."
+  exit north to room_15
+    alias n
+  exit south to room_31
+    alias s
+
+room room_24 "Near Crumbling Wall"
+  alias "location 24"
+  desc "You are at near crumbling wall."
+  exit north to room_16
+    alias n
+
+room room_25 "Gloomy Passage"
+  alias "location 25"
+  desc "You are at gloomy passage."
+  exit north to room_17
+    alias n
+  exit south to room_33
+    alias s
+
+room room_26 "Pool of Light"
+  alias "location 26"
+  desc "You are at pool of light."
+  exit north to room_18
+    alias n
+  exit south to room_34
+    alias s
+  exit east to room_27
+    alias e
+
+room room_27 "Impressive Vaulted Hallway"
+  alias "location 27"
+  desc "You are at impressive vaulted hallway."
+  exit west to room_26
+    alias w
+  exit east to room_28
+    alias e
+
+room room_28 "Hall by Thick Wooden Door"
+  alias "location 28"
+  desc "You are at hall by thick wooden door."
+  exit west to room_27
+    alias w
+  exit east to room_29
+    alias e
+
+room room_29 "Trophy Room"
+  alias "location 29"
+  desc "You are at trophy room."
+  exit north to room_21
+    alias n
+  exit south to room_37
+    alias s
+  exit west to room_28
+    alias w
+
+room room_30 "Cellar with Barred Window"
+  alias "location 30"
+  desc "You are at cellar with barred window."
+  exit north to room_22
+    alias n
+  exit south to room_38
+    alias s
+
+room room_31 "Cliff Path"
+  alias "location 31"
+  desc "You are at cliff path."
+  exit north to room_23
+    alias n
+  exit south to room_39
+    alias s
+
+room room_32 "Cupboard with Hanging Coat"
+  alias "location 32"
+  desc "You are at cupboard with hanging coat."
+  exit north to room_24
+    alias n
+  exit south to room_40
+    alias s
+
+room room_33 "Front Hall"
+  alias "location 33"
+  desc "You are at front hall."
+  exit north to room_25
+    alias n
+  exit south to room_41
+    alias s
+  exit east to room_34
+    alias e
+
+room room_34 "Sitting Room"
+  alias "location 34"
+  desc "You are at sitting room."
+  exit north to room_26
+    alias n
+  exit south to room_42
+    alias s
+  exit west to room_33
+    alias w
+
+room room_35 "Secret Room"
+  alias "location 35"
+  desc "You are at secret room."
+  exit south to room_43
+    alias s
+
+room room_36 "Steep Marble Stairs"
+  alias "location 36"
+  desc "You are at steep marble stairs."
+  exit north to room_28
+    alias n
+  exit south to room_44
+    alias s
+  exit up to room_28
+    alias u
+  exit down to room_44
+    alias d
+
+room room_37 "Dining Room"
+  alias "location 37"
+  desc "You are at dining room."
+  exit north to room_29
+    alias n
+
+room room_38 "Deep Cellar with Coffin"
+  alias "location 38"
+  desc "You are at deep cellar with coffin."
+  exit north to room_30
+    alias n
+
+room room_39 "Cliff Path"
+  alias "location 39"
+  desc "You are at cliff path."
+  exit north to room_31
+    alias n
+  exit south to room_47
+    alias s
+
+room room_40 "Closet"
+  alias "location 40"
+  desc "You are at closet."
+  exit north to room_32
+    alias n
+
+room room_41 "Front Lobby"
+  alias "location 41"
+  desc "You are at front lobby."
+  exit north to room_33
+    alias n
+  exit east to room_42
+    alias e
+
+room room_42 "Library of Evil Books"
+  alias "location 42"
+  desc "You are at library of evil books."
+  exit north to room_34
+    alias n
+  exit west to room_41
+    alias w
+
+room room_43 "Study with Desk and Hole in Wall"
+  alias "location 43"
+  desc "You are at study with desk and hole in wall."
+  exit north to room_35
+    alias n
+  exit east to room_44
+    alias e
+
+room room_44 "Weird Cobwebby Room"
+  alias "location 44"
+  desc "You are at weird cobwebby room."
+  exit west to room_43
+    alias w
+
+room room_45 "Very Cold Chamber"
+  alias "location 45"
+  desc "You are at very cold chamber."
+  exit north to room_37
+    alias n
+  exit south to room_53
+    alias s
+  exit east to room_46
+    alias e
+
+room room_46 "Spooky Room"
+  alias "location 46"
+  desc "You are at spooky room."
+  exit west to room_45
+    alias w
+  exit east to room_47
+    alias e
+
+room room_47 "Cliff Path by Marsh"
+  alias "location 47"
+  desc "You are at cliff path by marsh."
+  exit west to room_46
+    alias w
+
+room room_48 "Rubble Strewn Verandah"
+  alias "location 48"
+  desc "You are at rubble strewn verandah."
+  exit north to room_40
+    alias n
+  exit south to room_56
+    alias s
+  exit east to room_49
+    alias e
+
+room room_49 "Front Porch"
+  alias "location 49"
+  desc "You are at front porch."
+  exit north to room_41
+    alias n
+  exit south to room_57
+    alias s
+  exit west to room_48
+    alias w
+
+room room_50 "Front Tower"
+  alias "location 50"
+  desc "You are at front tower."
+  exit east to room_51
+    alias e
+
+room room_51 "Sloping Corridor"
+  alias "location 51"
+  desc "You are at sloping corridor."
+  exit west to room_50
+    alias w
+  exit east to room_52
+    alias e
+
+room room_52 "Upper Gallery"
+  alias "location 52"
+  desc "You are at upper gallery."
+  exit north to room_44
+    alias n
+  exit west to room_51
+    alias w
+
+room room_53 "Marsh by Wall"
+  alias "location 53"
+  desc "You are at marsh by wall."
+  exit south to room_61
+    alias s
+
+room room_54 "Marsh"
+  alias "location 54"
+  desc "You are at marsh."
+  exit south to room_62
+    alias s
+  exit west to room_53
+    alias w
+
+room room_55 "Soggy Path"
+  alias "location 55"
+  desc "You are at soggy path."
+  exit north to room_47
+    alias n
+  exit west to room_54
+    alias w
+
+room room_56 "By Twisted Railing"
+  alias "location 56"
+  desc "You are at by twisted railing."
+  exit north to room_48
+    alias n
+
+room room_57 "Path Through Iron Gate"
+  alias "location 57"
+  desc "A path passes through an iron gate towards a strange, gloomy house. This is where the adventure begins."
+  exit north to room_49
+    alias n
+  exit east to room_58
+    alias e
+
+room room_58 "By Railings"
+  alias "location 58"
+  desc "You are at by railings."
+  exit north to room_50
+    alias n
+  exit west to room_57
+    alias w
+  exit east to room_59
+    alias e
+
+room room_59 "Beneath Front Tower"
+  alias "location 59"
+  desc "You are at beneath front tower."
+  exit west to room_58
+    alias w
+  exit east to room_60
+    alias e
+
+room room_60 "Debris from Crumbling Facade"
+  alias "location 60"
+  desc "You are at debris from crumbling facade."
+  exit west to room_59
+    alias w
+  exit east to room_61
+    alias e
+
+room room_61 "Large Fallen Brickwork"
+  alias "location 61"
+  desc "You are at large fallen brickwork."
+  exit north to room_53
+    alias n
+  exit west to room_60
+    alias w
+  exit east to room_62
+    alias e
+
+room room_62 "Rotting Stone Arch"
+  alias "location 62"
+  desc "You are at rotting stone arch."
+  exit north to room_54
+    alias n
+  exit west to room_61
+    alias w
+  exit east to room_63
+    alias e
+
+room room_63 "Crumbling Clifftop"
+  alias "location 63"
+  desc "You are at crumbling clifftop."
+  exit west to room_62
+    alias w
+
+obj painting in room_46 "Oil Painting"
+  desc "An old oil painting in a heavy frame."
+  portable true
+  verb examine
+    say "An old oil painting in a heavy frame."
+
+obj ring in hidden_store "Diamond Ring"
+  desc "A diamond ring which glitters even in the poor light."
+  portable true
+  verb examine
+    say "A diamond ring which glitters even in the poor light."
+
+obj magic_spells in hidden_store "Book of Magic Spells"
+  desc "A heavy book filled with evil looking symbols and one useful spell."
+  portable true
+  verb examine
+    say "A heavy book filled with evil looking symbols and one useful spell."
+  verb read
+    say "One spell is clear enough to pronounce: XZANFAR."
+
+obj goblet in room_50 "Jewelled Goblet"
+  desc "A jewelled goblet, valuable and slightly sinister."
+  portable true
+  verb examine
+    say "A jewelled goblet, valuable and slightly sinister."
+
+obj scroll in room_13 "Ancient Scroll"
+  desc "An ancient scroll covered in cramped writing."
+  portable true
+  verb examine
+    say "An ancient scroll covered in cramped writing."
+  verb read
+    say "The scroll warns that bats guard the turret room and that evil works fear the word XZANFAR."
+
+obj coins in room_18 "Bag of Gold Coins"
+  desc "A heavy bag of gold coins."
+  portable true
+  verb examine
+    say "A heavy bag of gold coins."
+
+obj statue in room_28 "Ebony Statue"
+  desc "A small ebony statue with polished eyes."
+  portable true
+  verb examine
+    say "A small ebony statue with polished eyes."
+
+obj candlestick in room_42 "Gold Candlestick"
+  desc "A gold candlestick large enough to hold the candle."
+  portable true
+  verb examine
+    say "A gold candlestick large enough to hold the candle."
+
+obj matches in room_10 "Matches"
+  desc "A box containing a few dry matches."
+  portable true
+  verb examine
+    say "A box containing a few dry matches."
+
+obj vacuum in room_25 "Portable Vacuum Cleaner"
+  desc "A portable vacuum cleaner with an empty battery compartment."
+  portable true
+  state powered = false
+  verb examine
+    say "A portable vacuum cleaner with an empty battery compartment."
+
+obj batteries in room_26 "Batteries"
+  desc "A pair of batteries which fit the vacuum cleaner."
+  portable true
+  verb examine
+    say "A pair of batteries which fit the vacuum cleaner."
+
+obj shovel in room_04 "Shovel"
+  desc "A sturdy shovel."
+  portable true
+  verb examine
+    say "A sturdy shovel."
+
+obj axe in room_02 "Axe"
+  desc "A sharp axe left beside the woodpile."
+  portable true
+  verb examine
+    say "A sharp axe left beside the woodpile."
+
+obj rope in room_07 "Rope"
+  desc "A long coil of rope."
+  portable true
+  verb examine
+    say "A long coil of rope."
+
+obj boat in room_47 "Boat"
+  desc "A small boat which looks barely fit for the marsh."
+  portable true
+  verb examine
+    say "A small boat which looks barely fit for the marsh."
+
+obj aerosol in room_60 "Aerosol Can"
+  desc "A can labelled 'Baticide'."
+  portable true
+  verb examine
+    say "A can labelled 'Baticide'."
+
+obj candle in hidden_store "Candle"
+  desc "A plain wax candle."
+  portable true
+  state lit = false
+  verb examine
+    say "A plain wax candle."
+
+obj key in hidden_store "Iron Key"
+  desc "A large iron key."
+  portable true
+  verb examine
+    say "A large iron key."
+
+obj desk in room_43 "Desk"
+  desc "A dusty desk with a single drawer."
+  portable false
+  verb examine
+    say "The desk has a drawer. It may be worth opening."
+
+obj drawer in room_43 "Drawer"
+  desc "The drawer is closed."
+  portable false
+  state open = false
+  verb open
+    if drawer.open
+      say "The drawer is already open."
+    else
+      set drawer.open = true
+      move candle to room_43
+      say "You open the drawer and discover a candle."
+
+obj coat in room_32 "Hanging Coat"
+  desc "A long coat hangs in the cupboard."
+  portable false
+  verb examine
+    move key to room_32
+    say "You search the coat and find a large iron key in its pocket."
+
+obj coffin in room_38 "Coffin"
+  desc "A stone coffin rests in the deep cellar."
+  portable false
+  state open = false
+  verb open
+    if coffin.open
+      say "The coffin is already open."
+    else
+      set coffin.open = true
+      move ring to room_38
+      say "The lid grinds aside. A diamond ring lies within."
+
+obj bats in room_13 "Bats"
+  desc "A cloud of bats circles the turret room."
+  portable false
+  state dispersed = false
+  verb examine
+    if bats.dispersed
+      say "The bats have fled."
+    else
+      say "The bats swoop close whenever you approach the scroll."
+
+obj false_wall in room_35 "False Wall"
+  desc "One part of the wall sounds hollow."
+  portable false
+  state broken = false
+  verb examine
+    say "The wall sounds hollow. A heavy cutting tool might break it."
+
+obj locked_door in room_28 "Locked Door"
+  desc "A thick wooden door blocks the hall."
+  portable false
+  state unlocked = false
+  verb examine
+    if locked_door.unlocked
+      say "The door stands unlocked."
+    else
+      say "The door is locked."
+
+obj ghosts in room_52 "Paralysing Ghosts"
+  desc "Pale ghosts drift across the upper gallery."
+  portable false
+  state removed = false
+  verb examine
+    if ghosts.removed
+      say "Only wisps of ectoplasm remain."
+    else
+      say "The ghosts reach towards you and stop you passing safely."
+
+obj barrier in room_45 "Magical Barrier"
+  desc "A magical barrier shimmers to the west."
+  portable false
+  state dispelled = false
+  verb examine
+    if barrier.dispelled
+      say "The magical barrier has vanished."
+    else
+      say "The barrier crackles with hostile magic."
+
+obj bars in room_30 "Barred Window"
+  desc "Iron bars cover the cellar window."
+  portable false
+  state removed = false
+  verb examine
+    if bars.removed
+      say "The bars have been dug out of the wall."
+    else
+      say "The bars are firmly set into crumbling mortar."
+
+obj marsh in room_54 "Marsh"
+  desc "The marsh mud is deep and treacherous."
+  portable false
+  verb examine
+    say "Crossing safely will require something which floats."
+
+obj scorecard in room_57 "Scorecard"
+  desc "A card for checking which treasures you carry."
+  portable false
+  verb score
+    say "Treasures currently carried:"
+    if have painting
+      say "  Painting"
+    if have ring
+      say "  Ring"
+    if have magic_spells
+      say "  Magic Spells"
+    if have goblet
+      say "  Goblet"
+    if have scroll
+      say "  Scroll"
+    if have coins
+      say "  Coins"
+    if have statue
+      say "  Statue"
+    if have candlestick
+      say "  Candlestick"
+    say "There are eight treasures in all. Return to the iron gate carrying them to complete the adventure."
+
+rule use matches on candle
+  if have matches and have candle
+    if candle.lit
+      say "The candle is already alight."
+    else
+      set candle.lit = true
+      say "The candle casts a flickering light."
+  else
+    say "You need both the candle and the matches."
+
+rule use batteries on vacuum
+  if have batteries and have vacuum
+    set vacuum.powered = true
+    say "You fit the batteries. The vacuum cleaner hums into life."
+  else
+    say "You need the vacuum cleaner and its batteries."
+
+rule use aerosol on bats
+  if have aerosol
+    set bats.dispersed = true
+    say "Pfft. The bats scatter, leaving the scroll unguarded."
+  else
+    say "You need something which will drive the bats away."
+
+rule use axe on false_wall
+  if have axe
+    set false_wall.broken = true
+    move magic_spells to room_35
+    say "You swing the axe. The false wall collapses and reveals a secret book of spells."
+  else
+    say "You need a suitable tool."
+
+rule use key on locked_door
+  if have key
+    set locked_door.unlocked = true
+    say "The key turns in the lock."
+  else
+    say "You do not have the key."
+
+rule use vacuum on ghosts
+  if have vacuum and vacuum.powered
+    set ghosts.removed = true
+    say "Whizz. The vacuum cleaner sucks up the paralysing ghosts."
+  elif have vacuum
+    say "The vacuum cleaner has no power."
+  else
+    say "You need the portable vacuum cleaner."
+
+rule use magic_spells on barrier
+  if have magic_spells
+    set barrier.dispelled = true
+    say "You speak XZANFAR. The magical barrier dissolves."
+  else
+    say "You do not know the necessary spell."
+
+rule use shovel on bars
+  if have shovel
+    set bars.removed = true
+    say "You dig around the edge of the bars until they come free."
+  else
+    say "You need a digging tool."
+
+rule use boat on marsh
+  if have boat
+    say "You launch the boat and cross the marsh, but it becomes stuck in the mud."
+    move boat to room_54
+  else
+    say "The mud is too deep to cross safely."
+
+rule use candle on candlestick
+  if have candle and have candlestick
+    say "You place the candle in the gold candlestick."
+  else
+    say "You need the candle and the candlestick."

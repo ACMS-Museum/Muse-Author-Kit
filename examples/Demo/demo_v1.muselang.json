@@ -1,0 +1,376 @@
+{
+  "language_version": "1.0",
+  "bundle_schema": 1,
+  "runtime_api": 1,
+  "source": "examples\\demo_v1.muse",
+  "nouns": [
+    {
+      "kind": "room",
+      "id": "workshop",
+      "name": "Museum Workshop",
+      "location": null,
+      "aliases": [
+        "workshop"
+      ],
+      "description": "A maintenance bench stands beneath rows of vintage test equipment.",
+      "tags": [],
+      "state": {},
+      "portable": null,
+      "type_id": null,
+      "interactions": [],
+      "macro_rules": [],
+      "dialogue": null,
+      "required_behaviours": []
+    },
+    {
+      "kind": "object",
+      "id": "panel",
+      "name": "Maintenance Panel",
+      "location": "workshop",
+      "aliases": [
+        "panel",
+        "hatch"
+      ],
+      "description": "A brushed metal maintenance panel with two stubborn screws.",
+      "tags": [],
+      "state": {
+        "open": false
+      },
+      "portable": null,
+      "type_id": null,
+      "interactions": [
+        {
+          "id": "examine",
+          "verb": "examine",
+          "aliases": [
+            "inspect"
+          ],
+          "behaviour": "behaviours.common.simple_message.SimpleMessage",
+          "hint": null,
+          "status": null,
+          "message": "The panel is secured by two flat-bladed screws.",
+          "config": {}
+        },
+        {
+          "id": "open",
+          "verb": "open",
+          "aliases": [],
+          "behaviour": "behaviours.common.conditional_verbs.ConditionalVerbCmdSet",
+          "hint": null,
+          "status": null,
+          "message": null,
+          "config": {
+            "program": [
+              {
+                "op": "if",
+                "branches": [
+                  {
+                    "condition": [
+                      "truthy",
+                      "panel.open"
+                    ],
+                    "then": [
+                      [
+                        "say",
+                        "The maintenance panel is already open."
+                      ]
+                    ]
+                  }
+                ],
+                "else": [
+                  [
+                    "say",
+                    "The screws prevent the panel from opening."
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "macro_rules": [
+        {
+          "id": "use_screwdriver_on_panel",
+          "verb": "use",
+          "direct_object": "screwdriver",
+          "preposition": "on",
+          "target_object": "panel",
+          "handler": "behaviours.common.use_on_target.UseOnTargetCmdSet",
+          "program": [
+            {
+              "op": "if",
+              "branches": [
+                {
+                  "condition": [
+                    "truthy",
+                    "panel.open"
+                  ],
+                  "then": [
+                    [
+                      "say",
+                      "The panel is already open."
+                    ]
+                  ]
+                },
+                {
+                  "condition": [
+                    "have",
+                    "screwdriver"
+                  ],
+                  "then": [
+                    [
+                      "set",
+                      "panel.open",
+                      true
+                    ],
+                    [
+                      "say",
+                      "You loosen the screws and swing the maintenance panel open."
+                    ]
+                  ]
+                }
+              ],
+              "else": [
+                [
+                  "say",
+                  "You need to be carrying the screwdriver."
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "dialogue": null,
+      "required_behaviours": [
+        "behaviours.common.conditional_verbs.ConditionalVerbCmdSet",
+        "behaviours.common.simple_message.SimpleMessage",
+        "behaviours.common.use_on_target.UseOnTargetCmdSet"
+      ]
+    },
+    {
+      "kind": "object",
+      "id": "screwdriver",
+      "name": "Screwdriver",
+      "location": "workshop",
+      "aliases": [
+        "tool"
+      ],
+      "description": "A broad, flat-bladed screwdriver.",
+      "tags": [],
+      "state": {},
+      "portable": true,
+      "type_id": null,
+      "interactions": [],
+      "macro_rules": [],
+      "dialogue": null,
+      "required_behaviours": []
+    },
+    {
+      "kind": "object",
+      "id": "badge",
+      "name": "Museum Badge",
+      "location": "workshop",
+      "aliases": [
+        "pass"
+      ],
+      "description": "A temporary museum access badge.",
+      "tags": [],
+      "state": {},
+      "portable": true,
+      "type_id": null,
+      "interactions": [],
+      "macro_rules": [],
+      "dialogue": null,
+      "required_behaviours": []
+    },
+    {
+      "kind": "character",
+      "id": "curator",
+      "name": "Curator",
+      "location": "workshop",
+      "aliases": [
+        "volunteer"
+      ],
+      "description": "A museum volunteer waits beside the workbench.",
+      "tags": [],
+      "state": {},
+      "portable": null,
+      "type_id": null,
+      "interactions": [
+        {
+          "id": "talk",
+          "verb": "talk",
+          "aliases": [
+            "greet"
+          ],
+          "behaviour": "behaviours.common.dialogue.DialogueCmdSet",
+          "hint": null,
+          "status": null,
+          "message": null,
+          "config": {
+            "dialogue_entry": "greeting"
+          }
+        }
+      ],
+      "macro_rules": [],
+      "dialogue": {
+        "behaviour": "behaviours.common.dialogue.DialogueCmdSet",
+        "entry": "greeting",
+        "nodes": {
+          "greeting": {
+            "program": [
+              [
+                "say",
+                "The curator glances at the maintenance panel."
+              ],
+              [
+                "option",
+                "help",
+                "Can I help with the repair?",
+                "h",
+                [
+                  "have",
+                  "badge"
+                ],
+                "approved"
+              ],
+              [
+                "option",
+                "leave",
+                "not right now.",
+                "n",
+                null,
+                "goodbye"
+              ]
+            ],
+            "say": [
+              "The curator glances at the maintenance panel."
+            ],
+            "options": [
+              {
+                "id": "help",
+                "label": "Can I help with the repair?",
+                "hotkey": "h",
+                "condition": [
+                  "have",
+                  "badge"
+                ],
+                "target": "approved"
+              },
+              {
+                "id": "leave",
+                "label": "not right now.",
+                "hotkey": "n",
+                "condition": null,
+                "target": "goodbye"
+              }
+            ]
+          },
+          "approved": {
+            "program": [
+              [
+                "say",
+                "Certainly. Use the screwdriver on the panel."
+              ],
+              [
+                "set",
+                "curator.approved",
+                true
+              ],
+              [
+                "end"
+              ]
+            ],
+            "say": [
+              "Certainly. Use the screwdriver on the panel."
+            ],
+            "actions": [
+              [
+                "set",
+                "curator.approved",
+                true
+              ],
+              [
+                "end"
+              ]
+            ]
+          },
+          "goodbye": {
+            "program": [
+              [
+                "say",
+                "Come back when you are ready."
+              ],
+              [
+                "end"
+              ]
+            ],
+            "say": [
+              "Come back when you are ready."
+            ],
+            "actions": [
+              [
+                "end"
+              ]
+            ]
+          }
+        }
+      },
+      "required_behaviours": [
+        "behaviours.common.dialogue.DialogueCmdSet"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "use_screwdriver_on_panel",
+      "verb": "use",
+      "direct_object": "screwdriver",
+      "preposition": "on",
+      "target_object": "panel",
+      "handler": "behaviours.common.use_on_target.UseOnTargetCmdSet",
+      "program": [
+        {
+          "op": "if",
+          "branches": [
+            {
+              "condition": [
+                "truthy",
+                "panel.open"
+              ],
+              "then": [
+                [
+                  "say",
+                  "The panel is already open."
+                ]
+              ]
+            },
+            {
+              "condition": [
+                "have",
+                "screwdriver"
+              ],
+              "then": [
+                [
+                  "set",
+                  "panel.open",
+                  true
+                ],
+                [
+                  "say",
+                  "You loosen the screws and swing the maintenance panel open."
+                ]
+              ]
+            }
+          ],
+          "else": [
+            [
+              "say",
+              "You need to be carrying the screwdriver."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

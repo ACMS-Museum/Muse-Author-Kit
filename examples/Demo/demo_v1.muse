@@ -1,0 +1,58 @@
+# MuseLang 1.0 demonstration world.
+
+room workshop "Museum Workshop"
+  alias "workshop"
+  desc "A maintenance bench stands beneath rows of vintage test equipment."
+
+obj panel in workshop "Maintenance Panel"
+  alias "panel"
+  alias "hatch"
+  desc "A brushed metal maintenance panel with two stubborn screws."
+  state open = false
+
+  verb examine alias inspect
+    say "The panel is secured by two flat-bladed screws."
+
+  verb open
+    if panel.open
+      say "The maintenance panel is already open."
+    else
+      say "The screws prevent the panel from opening."
+
+obj screwdriver in workshop "Screwdriver"
+  alias "tool"
+  desc "A broad, flat-bladed screwdriver."
+  portable true
+
+obj badge in workshop "Museum Badge"
+  alias "pass"
+  desc "A temporary museum access badge."
+  portable true
+
+char curator in workshop "Curator"
+  alias "volunteer"
+  desc "A museum volunteer waits beside the workbench."
+
+  dialogue greeting
+    say "The curator glances at the maintenance panel."
+    option help "Can I <h>elp with the repair?" if have badge -> approved
+    option leave "<n>ot right now." -> goodbye
+
+  node approved
+    say "Certainly. Use the screwdriver on the panel."
+    set curator.approved = true
+    end
+
+  node goodbye
+    say "Come back when you are ready."
+    end
+
+rule use screwdriver on panel
+  if panel.open
+    say "The panel is already open."
+  elif have screwdriver
+    set panel.open = true
+    say "You loosen the screws and swing the maintenance panel open."
+  else
+    say "You need to be carrying the screwdriver."
+
